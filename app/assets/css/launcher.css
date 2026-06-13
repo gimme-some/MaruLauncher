@@ -18,8 +18,25 @@
 }
 
 @font-face {
-    font-family: 'Ringbearer';
-    src: url('../fonts/Ringbearer.ttf');
+    font-family: 'Avenir Heavy';
+    src: url('../fonts/Avenir-Heavy.ttf');
+}
+
+@font-face {
+    font-family: 'Avenir Black';
+    src: url('../fonts/Avenir-Black.ttf');
+}
+
+/* Korean text font. Avenir has no Korean glyphs, so Korean characters fall back
+   to Pretendard while Latin text keeps using Avenir. */
+@font-face {
+    font-family: 'Pretendard';
+    src: url('../fonts/Pretendard-Regular.woff2');
+}
+
+@font-face {
+    font-family: 'Pretendard Medium';
+    src: url('../fonts/Pretendard-Medium.woff2');
 }
 
 /*******************************************************************************
@@ -42,7 +59,7 @@ p {
 
 /* Set default font and color. */
 body, button {
-    font-family: 'Avenir Book';
+    font-family: 'Avenir Book', 'Pretendard';
     color: white;
 }
 
@@ -110,7 +127,7 @@ body, button {
 }
 #frameTitleText {
     font-size: 14px;
-    font-family: 'Avenir Medium';
+    font-family: 'Avenir Medium', 'Pretendard Medium';
     letter-spacing: 0.5px;
 }
 
@@ -222,7 +239,7 @@ body, button {
     align-items: center;
     height: 100%;
     width: 100%;
-    background: rgba(0, 0, 0, 0.50);
+    background: rgba(14, 9, 5, 0.55);
 }
 
 #welcomeContent {
@@ -230,8 +247,14 @@ body, button {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 50%;
-    top: -10%;
+    box-sizing: border-box;
+    max-width: 540px;
+    padding: 40px 44px 34px;
+    border-radius: 18px;
+    background: linear-gradient(165deg, rgba(47, 33, 19, 0.66) 0%, rgba(26, 18, 10, 0.78) 100%);
+    backdrop-filter: blur(18px) saturate(1.15);
+    border: 1px solid rgba(239, 228, 208, 0.13);
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 246, 229, 0.09);
     position: relative;
 }
 
@@ -274,88 +297,93 @@ body, button {
 
 #welcomeImageSeal {
     border-radius: 50%;
-    border: 2px solid #cad7e1;
-    background: rgba(1, 2, 1, 0.5);
-    height: 125px;
-    width: 125px;
-    box-shadow: 0px 0px 10px 0px rgb(0, 0, 0);
-    margin-bottom: 5%;
-    margin-top: 10%;
+    height: 96px;
+    width: 96px;
+    box-shadow: 0 8px 22px rgba(10, 6, 2, 0.45);
+    margin-bottom: 22px;
 }
 
 #welcomeHeader {
-    font-family: 'Avenir Medium';
+    font-family: 'Pretendard Medium', 'Avenir Medium';
     text-align: center;
-    color: white;
-    margin-bottom: 25px;
-    letter-spacing: 1px;
-    font-size: 20px;
-    text-shadow: white 0px 0px 0px;
+    color: #F7EEDD;
+    margin-bottom: 16px;
+    letter-spacing: -0.2px;
+    font-size: 23px;
 }
 
 #welcomeDescription {
-    text-align: justify;
+    text-align: center;
+    font-family: 'Pretendard', 'Avenir Book';
     font-size: 13px;
-    font-weight: 100;
-    text-shadow: rgba(255, 255, 255, 0.75) 0px 0px 20px
+    line-height: 1.65;
+    color: rgba(244, 234, 218, 0.72);
 }
 
 #welcomeDescCTA {
     text-align: center;
-    font-size: 14px;
-    font-weight: 100;
-    text-shadow: rgba(255, 255, 255, 0.75) 0px 0px 20px
+    font-family: 'Pretendard Medium', 'Avenir Medium';
+    font-size: 13.5px;
+    color: #F4EADA;
+    margin-top: 14px;
 }
 
-/* Login button styles. */
+/* Continue button — cream "PLAY" style. */
 #welcomeButton {
-    background: none;
-    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    min-width: 150px;
+    padding: 0px 24px;
+    margin-top: 28px;
+    border-radius: 15px;
+    background: linear-gradient(180deg, #F6EDDD 0%, #E8DAC0 100%);
+    color: #432F1B;
+    font-family: 'Avenir Heavy', 'Avenir Medium', 'Pretendard Medium';
+    font-weight: 900;
     letter-spacing: 2px;
-    border: none;
-    padding: 15px 5px;
-    margin: 10px 0px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 8px 22px rgba(10, 6, 2, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.65), inset 0 -2px 0 rgba(71, 52, 30, 0.18);
     cursor: pointer;
     position: relative;
-    right: -20px;
-    transition: 0.5s ease;
-    margin-top: 5%;
-    margin-bottom: -5%;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease, background 0.15s ease;
 }
 #welcomeButton:disabled {
-    color: rgba(255, 255, 255, 0.75);
+    background: rgba(80, 62, 40, 0.45);
+    color: rgba(244, 234, 218, 0.40);
+    border-color: rgba(239, 228, 208, 0.10);
+    box-shadow: none;
     pointer-events: none;
 }
 #welcomeButton:hover,
 #welcomeButton:focus {
-    text-shadow: 0px 0px 20px #fff;
+    transform: translateY(-1px);
+    filter: brightness(1.03);
     outline: none;
 }
+#welcomeButton:focus-visible {
+    outline: 2px solid #FFD9A0;
+    outline-offset: 3px;
+}
 #welcomeButton:active {
-    color: #c7c7c7;
-    text-shadow: 0px 0px 20px #c7c7c7;
+    transform: translateY(1px);
+    background: #E0D0B2;
 }
 #welcomeSVG {
     -webkit-transform: translate3d(0, 0, 0);
     overflow: visible;
     transform: rotate(90deg);
-    margin-left: 20px;
+    margin-left: 12px;
     transition: 0.25s ease;
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
 }
-#welcomeButton:hover #welcomeSVG,
-#welcomeButton:focus #welcomeSVG {
-    -webkit-filter: drop-shadow(0px 0px 2px #fff);
-}
-#welcomeButton:active #welcomeSVG .arrowLine {
-    stroke: #c7c7c7;
-}
-#welcomeButton:active #welcomeSVG {
-    -webkit-filter: drop-shadow(0px 0px 2px #c7c7c7);
+#welcomeSVG .arrowLine {
+    stroke: #432F1B;
 }
 #welcomeButton:disabled #welcomeSVG .arrowLine {
-    stroke: rgba(255, 255, 255, 0.75);
+    stroke: rgba(244, 234, 218, 0.40);
 }
 
 #welcomeButtonContent {
@@ -372,8 +400,8 @@ body, button {
 /* Styles for dimmer login span. */
 .loginSpanDim {
     font-size: 12px;
-    color: #848484;
-    font-weight: bold;
+    color: rgba(244, 234, 218, 0.62);
+    font-family: 'Pretendard', 'Avenir Book';
 }
 
 /* Main login container. */
@@ -385,7 +413,7 @@ body, button {
     height: 100%;
     width: 100%;
     transition: filter 0.25s ease;
-    background: rgba(0, 0, 0, 0.50);
+    background: rgba(14, 9, 5, 0.55);
 }
 
 /* Login cancel button styles. */
@@ -407,34 +435,31 @@ body, button {
 #loginCancelButton:hover #loginCancelText,
 #loginCancelButton:focus #loginCancelIcon,
 #loginCancelButton:focus #loginCancelText {
-    text-shadow: 0px 0px 20px white;
+    color: #FFD9A0;
 }
 #loginCancelButton:hover #loginCancelIcon,
 #loginCancelButton:focus #loginCancelIcon {
-    box-shadow: 0px 0px 20px white;
+    border-color: #FFD9A0;
+    box-shadow: 0px 0px 10px rgba(255, 217, 160, 0.4);
 }
 #loginCancelButton:active #loginCancelIcon,
 #loginCancelButton:active #loginCancelText {
-    text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.75);
-    color: rgba(255, 255, 255, 0.75);
-    border-color: rgba(255, 255, 255, 0.75);
-}
-#loginCancelButton:active #loginCancelIcon {
-    box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.75);
+    color: #E0C795;
+    border-color: #E0C795;
 }
 #loginCancelButton:disabled {
     pointer-events: none;
 }
 #loginCancelButton:disabled #loginCancelIcon,
 #loginCancelButton:disabled #loginCancelText {
-    color: rgba(255, 255, 255, 0.75);
-    border-color: rgba(255, 255, 255, 0.75);
+    color: rgba(244, 234, 218, 0.40);
+    border-color: rgba(244, 234, 218, 0.40);
 }
 
 /* The X in a circle icon for the cancel button. */
 #loginCancelIcon {
     border-radius: 50%;
-    border: 1px solid white;
+    border: 1px solid rgba(239, 228, 208, 0.5);
     box-sizing: border-box;
     height: 30px;
     width: 30px;
@@ -442,12 +467,14 @@ body, button {
     line-height: 30px;
     margin: 0 auto;
     margin-bottom: 5px;
-    transition: 0.25s ease;
+    color: #F4EADA;
+    transition: 0.18s ease;
 }
 /* Text for the login cancel button. */
 #loginCancelText {
     font-size: 15px;
-    transition: 0.25s ease;
+    color: #F4EADA;
+    transition: 0.18s ease;
 }
 
 /* Login content wrapper. */
@@ -459,77 +486,96 @@ body, button {
     padding: 0px 25px;
 }
 
-/* Login form. */
+/* Login form — espresso-glass card. */
 #loginForm {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    box-sizing: border-box;
+    width: 360px;
+    padding: 34px 36px 28px;
+    border-radius: 18px;
+    background: linear-gradient(165deg, rgba(47, 33, 19, 0.66) 0%, rgba(26, 18, 10, 0.78) 100%);
+    backdrop-filter: blur(18px) saturate(1.15);
+    border: 1px solid rgba(239, 228, 208, 0.13);
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 246, 229, 0.09);
 }
 
 /* Login form anchor styles. */
 #loginForm a {
     font-size: 12px;
-    color: #848484;
-    font-weight: bold;
+    color: rgba(244, 234, 218, 0.62);
+    font-family: 'Pretendard', 'Avenir Book';
     text-decoration: none;
-    transition: 0.25s ease;
+    transition: color 0.18s ease;
 }
 #loginForm a:hover,
 #loginForm a:focus {
-    color: #a2a2a2;
+    color: #FFD9A0;
     outline: none;
 }
 #loginForm a:active {
-    color: #8b8b8b;
+    color: #E0C795;
 }
 
 /* Logo on login form. */
 #loginImageSeal {
     border-radius: 50%;
-    border: 2px solid #cad7e1;
-    background: rgba(1, 2, 1, 0.5);
-    height: 125px;
-    width: 125px;
-    box-shadow: 0px 0px 10px 0px rgb(0, 0, 0);
-    margin-bottom: 20px;
+    height: 104px;
+    width: 104px;
+    box-shadow: 0 8px 22px rgba(10, 6, 2, 0.45);
+    margin-bottom: 18px;
 }
 
 /* Header on login view. */
 #loginSubheader {
-    font-family: 'Avenir Medium';
-    margin-bottom: 25px;
-    font-size: 12px;
+    font-family: 'Avenir Medium', 'Pretendard Medium';
+    margin-bottom: 24px;
+    font-size: 17px;
     letter-spacing: 1px;
-    font-weight: bold;
+    font-weight: 600;
+    color: #F7EEDD;
 }
 
-/* Container to organize login field elements. */
+/* Login field — a clear glass input box: icon on the left, text inside. */
 .loginFieldContainer {
     position: relative;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
     align-items: center;
-}
-
-/* SVG icons on the login view. */
-.loginSVG {
-    fill: #fff;
-    height: 20px;
-    width: 20px;
-}
-
-/* Span which displays errors related to login field content. */
-.loginErrorSpan {
-    font-family: 'Avenir Medium';
-    font-weight: bold;
-    font-size: 8px;
-    color: #ff1b0c;
+    gap: 10px;
     width: 100%;
-    text-align: right;
+    box-sizing: border-box;
+    padding: 0px 14px;
+    margin-bottom: 22px;
+    background: rgba(24, 17, 10, 0.50);
+    border: 1px solid rgba(239, 228, 208, 0.16);
+    border-radius: 11px;
+    transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+.loginFieldContainer:focus-within {
+    border-color: #FFD9A0;
+    box-shadow: 0 0 0 2px rgba(255, 217, 160, 0.22);
+}
+
+/* SVG icons on the login view (inside the field box, left). */
+.loginSVG {
+    fill: rgba(244, 234, 218, 0.55);
+    height: 18px;
+    width: 18px;
+    flex-shrink: 0;
+}
+
+/* Span which displays errors related to login field content (floats above-right). */
+.loginErrorSpan {
+    font-family: 'Pretendard Medium', 'Avenir Medium';
+    font-weight: 600;
+    font-size: 11px;
+    color: #D27A5A;
     position: absolute;
-    top: 7px;
+    top: -17px;
+    right: 2px;
     opacity: 0;
     transition: 0.25s ease;
 }
@@ -556,35 +602,31 @@ body, button {
     }
 }
 
-/* Login text input styles. */
+/* Login text input — fills the glass box, left-aligned. */
 .loginField {
-    font-family: 'Avenir Book';
+    flex: 1 1 auto;
+    min-width: 0;
+    font-family: 'Avenir Book', 'Pretendard';
     background: none;
-    border-width: 1.5px 0px 0px 0px;
-    border-style: solid;
-    width: 250px;
-    margin-bottom: 20px;
-    border-color: #fff;
-    color: rgba(255, 255, 255, 0.75);
-    font-weight: bold;
-    text-align: center;
+    border: none;
+    color: #F4EADA;
+    text-align: left;
     box-sizing: border-box;
-    padding: 7.5px;
-    font-size: 10px;
-    letter-spacing: 1px;
+    padding: 12px 0px;
+    font-size: 13px;
+    letter-spacing: 0.02em;
 }
 .loginField:focus {
     outline: none;
 }
 .loginField:disabled {
-    color: rgba(255, 255, 255, 0.50);
+    color: rgba(244, 234, 218, 0.40);
 }
 .loginField::-webkit-input-placeholder {
-    color: rgba(255, 255, 255, 0.75);
-    font-size: 10px;
-    letter-spacing: 1px;
-    text-align: center;
-    font-weight: bold;
+    color: rgba(244, 234, 218, 0.45);
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    text-align: left;
 }
 .loginField:focus::-webkit-input-placeholder {
     color: transparent;
@@ -605,59 +647,72 @@ body, button {
 /* Remember option text. */
 #loginRememberText {
     padding-right: 10px;
-    transition: 0.25s ease;
+    color: rgba(244, 234, 218, 0.72);
+    font-family: 'Pretendard', 'Avenir Book';
+    font-size: 12px;
+    transition: 0.18s ease;
 }
 
-/* Login button styles. */
+/* Login button — cream "PLAY" style. */
 #loginButton {
-    background: none;
-    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    min-width: 150px;
+    padding: 0px 22px;
+    margin: 18px 0px 0px;
+    border-radius: 15px;
+    background: linear-gradient(180deg, #F6EDDD 0%, #E8DAC0 100%);
+    color: #432F1B;
+    font-family: 'Avenir Heavy', 'Avenir Medium', 'Pretendard Medium';
+    font-weight: 900;
     letter-spacing: 2px;
-    border: none;
-    padding: 15px 5px;
-    margin: 10px 0px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 8px 22px rgba(10, 6, 2, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.65), inset 0 -2px 0 rgba(71, 52, 30, 0.18);
     cursor: pointer;
     position: relative;
-    right: -20px;
-    transition: 0.5s ease;
+    right: 0px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease, background 0.15s ease;
 }
 #loginButton:disabled {
-    color: rgba(255, 255, 255, 0.75);
+    background: rgba(80, 62, 40, 0.45);
+    color: rgba(244, 234, 218, 0.40);
+    border-color: rgba(239, 228, 208, 0.10);
+    box-shadow: none;
     pointer-events: none;
 }
 #loginButton[loading] {
-    color: #fff;
+    color: #432F1B;
 }
 #loginButton:hover,
 #loginButton:focus {
-    text-shadow: 0px 0px 20px #fff;
+    transform: translateY(-1px);
+    filter: brightness(1.03);
     outline: none;
 }
+#loginButton:focus-visible {
+    outline: 2px solid #FFD9A0;
+    outline-offset: 3px;
+}
 #loginButton:active {
-    color: #c7c7c7;
-    text-shadow:  0px 0px 20px #c7c7c7;
+    transform: translateY(1px);
+    background: #E0D0B2;
 }
 #loginSVG {
     -webkit-transform: translate3d(0, 0, 0);
     overflow: visible;
     transform: rotate(90deg);
-    margin-left: 20px;
+    margin-left: 12px;
     transition: 0.25s ease;
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
 }
-#loginButton:hover #loginSVG,
-#loginButton:focus #loginSVG {
-    -webkit-filter: drop-shadow(0px 0px 2px #fff);
-}
-#loginButton:active #loginSVG .arrowLine {
-    stroke: #c7c7c7;
-}
-#loginButton:active #loginSVG {
-    -webkit-filter: drop-shadow(0px 0px 2px #c7c7c7);
+#loginSVG .arrowLine {
+    stroke: #432F1B;
 }
 #loginButton:disabled #loginSVG .arrowLine {
-    stroke: rgba(255, 255, 255, 0.75);
+    stroke: rgba(244, 234, 218, 0.40);
 }
 
 #loginButtonContent {
@@ -676,9 +731,9 @@ body, button {
 
 
 .circle-loader {
-    margin-left: 20px;
-    border: 2px solid rgba(255, 255, 255, 0.5);
-    border-left-color: #ffffff;
+    margin-left: 12px;
+    border: 2px solid rgba(67, 47, 27, 0.25);
+    border-left-color: #432F1B;
     animation-name: loader-spin;
     animation-duration: 1s;
     animation-iteration-count: infinite;
@@ -692,7 +747,7 @@ body, button {
 }
 .load-complete {
     animation: none;
-    border-color: #ffffff;
+    border-color: #9CCB72;
     transition: border 500ms ease-out;
 }
 .checkmark {
@@ -709,8 +764,8 @@ body, button {
     height: 8px;
     width: 4px;
     transform-origin: left top;
-    border-right: 2px solid #ffffff;
-    border-top: 2px solid #ffffff;
+    border-right: 2px solid #9CCB72;
+    border-top: 2px solid #9CCB72;
     content: '';
     left: 2px;
     top: 8px;
@@ -757,8 +812,8 @@ body, button {
     border: 2px solid rgba(255,255,255,0);
     border-top-color: #ffffff;
     border-right-color: #ffffff;
-    border-left-color: rgba(255, 255, 255, 0.50);
-    border-bottom-color: rgba(255, 255, 255, 0.50);
+    border-left-color: rgba(239, 228, 208, 0.13);
+    border-bottom-color: rgba(239, 228, 208, 0.13);
     animation: single2 4s infinite linear;
 }
 
@@ -786,10 +841,22 @@ body, button {
 
 /* Disclaimer text styles. */
 .loginDisclaimerText {
-    font-size: 7px;
-    color: #848484;
-    font-weight: bold;
+    font-size: 10px;
+    color: rgba(244, 234, 218, 0.45);
+    font-family: 'Pretendard', 'Avenir Book';
+    line-height: 1.5;
     text-align: center;
+}
+
+/* Spacing so the login button is not glued to the "need an account?" link. */
+#loginDisclaimer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 18px;
+}
+#loginRegisterSpan {
+    margin-bottom: 12px;
 }
 
 /* * *
@@ -817,23 +884,28 @@ body, button {
 /* Create a custom checkbox. */
 .loginCheckmark {
     position: relative;
-    height: 10px;
-    width: 10px;
-    border: 1px solid #848484;
-    border-radius: 1px;
+    height: 12px;
+    width: 12px;
+    border: 1px solid rgba(239, 228, 208, 0.40);
+    border-radius: 10px;
     background: none;
-    transition: 0.25s ease;
+    transition: 0.18s ease;
 }
-/* On hover and focus, add a grey border color. */
+/* On hover and focus, warm to amber. */
 #checkmarkContainer:hover input ~ *,
 #checkmarkContainer input:focus ~ * {
-    color: #a2a2a2;
-    border-color: #a2a2a2;
+    color: #F4EADA;
+    border-color: #FFD9A0;
 }
-/* On keydown, darken the checkbox a bit. */
+/* On keydown, slightly deeper amber. */
 #checkmarkContainer input:active ~ *:not(#loginRememberText) {
-    color: #8d8d8d;
-    border-color: #8d8d8d;
+    color: #E0C795;
+    border-color: #E0C795;
+}
+/* Checked box fill. */
+#checkmarkContainer input:checked ~ .loginCheckmark {
+    border-color: #FFD9A0;
+    background: rgba(255, 217, 160, 0.15);
 }
 #checkmarkContainer[disabled] {
     pointer-events: none;
@@ -851,11 +923,11 @@ body, button {
 /* Style the checkmark/indicator. */
 #checkmarkContainer .loginCheckmark:after {
     position: absolute;
-    left: 3.5px;
-    top: 0.5px;
+    left: 4px;
+    top: 1px;
     width: 2px;
     height: 6px;
-    border: solid #a2a2a2;
+    border: solid #FFD9A0;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
 }
@@ -887,7 +959,7 @@ body, button {
     height: 100%;
     width: 100%;
     transition: filter 0.25s ease;
-    background: rgba(0, 0, 0, 0.50);
+    background: rgba(14, 9, 5, 0.55);
 }
 
 #waitingContent {
@@ -933,6 +1005,13 @@ body, button {
     position: fixed;
     top: 50%;
 }
+#waitingTextContainer h2 {
+    font-family: 'Pretendard Medium', 'Avenir Medium';
+    font-weight: 600;
+    color: #F7EEDD;
+    letter-spacing: -0.2px;
+    text-shadow: 0px 2px 12px rgba(10, 6, 2, 0.6);
+}
 
 @keyframes rotateBefore {
     from {
@@ -966,13 +1045,18 @@ body, button {
     height: 100%;
     width: 100%;
     transition: filter 0.25s ease;
-    background: rgba(0, 0, 0, 0.50);
+    background: rgba(14, 9, 5, 0.55);
 }
 
 #loginOptionsContent {
-    border-radius: 3px;
     position: relative;
-    top: -5%;
+    box-sizing: border-box;
+    padding: 32px 32px 28px;
+    border-radius: 18px;
+    background: linear-gradient(165deg, rgba(47, 33, 19, 0.66) 0%, rgba(26, 18, 10, 0.78) 100%);
+    backdrop-filter: blur(18px) saturate(1.15);
+    border: 1px solid rgba(239, 228, 208, 0.13);
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 246, 229, 0.09);
 }
 
 .loginOptionsMainContent {
@@ -981,63 +1065,102 @@ body, button {
     align-items: center;
 }
 
+/* Title. h2 default margins were leaving a big gap above the title inside the
+   card — reset to a controlled bottom-only gap. */
+#loginOptionsContent h2 {
+    margin: 0px 0px 22px 0px;
+    font-family: 'Pretendard Medium', 'Avenir Medium';
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+    color: #F7EEDD;
+    text-align: center;
+}
+
 .loginOptionActions {
     display: flex;
     flex-direction: column;
-    row-gap: 10px;
+    row-gap: 12px;
 }
 
 .loginOptionButtonContainer {
-    width: 16em;
+    width: 17em;
 }
 
+/* Base option button — ghost glass. */
 .loginOptionButton {
-    background: rgba(0, 0, 0, 0.25);
-    border: 1px solid rgba(126, 126, 126, 0.57);
-    border-radius: 3px;
-    height: 50px;
+    background: rgba(24, 17, 10, 0.50);
+    border: 1px solid rgba(239, 228, 208, 0.14);
+    border-radius: 13px;
+    height: 52px;
     width: 100%;
     text-align: left;
-    padding: 0px 25px;
+    padding: 0px 20px;
+    color: #F4EADA;
+    font-family: 'Pretendard Medium', 'Avenir Medium';
+    font-size: 14px;
     cursor: pointer;
     outline: none;
-    transition: 0.25s ease;
+    transition: 0.18s ease;
     display: flex;
     align-items: center;
-    column-gap: 5px;
+    column-gap: 10px;
 }
 .loginOptionButton:hover,
 .loginOptionButton:focus {
-    background: rgba(54, 54, 54, 0.25);
-    text-shadow: 0px 0px 20px white;
+    background: rgba(239, 228, 208, 0.10);
+    border-color: rgba(239, 228, 208, 0.22);
+    transform: translateY(-1px);
+}
+.loginOptionButton:focus-visible {
+    outline: 2px solid #FFD9A0;
+    outline-offset: 2px;
+}
+
+/* Microsoft is the recommended path — cream PLAY-style primary. */
+#loginOptionMicrosoft {
+    background: linear-gradient(180deg, #F6EDDD 0%, #E8DAC0 100%);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    color: #432F1B;
+    box-shadow: 0 8px 22px rgba(10, 6, 2, 0.40), inset 0 1px 0 rgba(255, 255, 255, 0.65), inset 0 -2px 0 rgba(71, 52, 30, 0.18);
+}
+#loginOptionMicrosoft:hover,
+#loginOptionMicrosoft:focus {
+    background: linear-gradient(180deg, #F6EDDD 0%, #E8DAC0 100%);
+    border-color: rgba(255, 255, 255, 0.45);
+    filter: brightness(1.03);
 }
 
 #loginOptionCancelContainer {
     position: absolute;
-    bottom: -100px;
+    bottom: -72px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 #loginOptionCancelButton {
-    background: none;
-    border: none;
-    padding: 2px 0px;
-    font-size: 16px;
-    font-weight: bold;
-    color: lightgrey;
+    background: rgba(239, 228, 208, 0.08);
+    border: 1px solid rgba(239, 228, 208, 0.18);
+    padding: 8px 22px;
+    border-radius: 13px;
+    font-family: 'Pretendard Medium', 'Avenir Medium';
+    font-size: 14px;
+    color: #F4EADA;
     cursor: pointer;
     outline: none;
-    transition: 0.25s ease;
+    transition: 0.18s ease;
 }
 #loginOptionCancelButton:hover,
 #loginOptionCancelButton:focus {
-    text-shadow: 0px 0px 20px lightgrey;
+    background: rgba(239, 228, 208, 0.12);
+    color: #FFD9A0;
 }
 #loginOptionCancelButton:active {
-    text-shadow: 0px 0px 20px rgba(211, 211, 211, 0.75);
-    color: rgba(211, 211, 211, 0.75);
+    background: rgba(239, 228, 208, 0.16);
+    color: #E0C795;
 }
 #loginOptionCancelButton:disabled {
-    color: rgba(211, 211, 211, 0.75);
+    color: rgba(244, 234, 218, 0.40);
     pointer-events: none;
 }
 
@@ -1053,14 +1176,14 @@ body, button {
     position: relative;
     height: 100%;
     display: flex;
-    background-color: rgba(0, 0, 0, 0.50);
+    background-color: rgba(14, 9, 5, 0.55);
     transition: background-color 0.25s cubic-bezier(.02, .01, .47, 1);
 }
 
 /* Drop shadow displayed when content is scrolled out of view. */
 #settingsContainer:before {
     content: '';
-    background: linear-gradient(rgba(0, 0, 0, 0.25), transparent);
+    background: linear-gradient(rgba(10, 6, 2, 0.35), transparent);
     width: 100%;
     height: 5px;
     position: absolute;
@@ -1073,110 +1196,158 @@ body, button {
 
 /* Left hand side of the settings UI, for navigation. */
 #settingsContainerLeft {
-    padding-top: 4%;
+    padding: 16px 0px 16px 16px;
     height: 100%;
     width: 25%;
+    min-width: 248px;
     box-sizing: border-box;
 }
 
-/* Settings navigation container. */
+/* Settings navigation container — warm glass rail. */
 #settingsNavContainer {
     height: 100%;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    padding: 26px 18px 18px;
+    border-radius: 18px;
+    background: linear-gradient(165deg, rgba(47, 33, 19, 0.66) 0%, rgba(26, 18, 10, 0.78) 100%);
+    backdrop-filter: blur(18px) saturate(1.15);
+    border: 1px solid rgba(239, 228, 208, 0.13);
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 246, 229, 0.09);
 }
 
-/* Navigation header styles. */
+/* Navigation header — fixed gap to the items (no floaty percentage). */
 #settingsNavHeader {
-    height: 15%;
-    display: flex;
-    justify-content: center;
+    display: block;
+    margin-bottom: 18px;
 }
 #settingsNavHeaderText {
-    font-size: 20px;
+    font-family: 'Pretendard Medium', 'Avenir Medium';
+    font-size: 22px;
+    color: #F7EEDD;
+    letter-spacing: -0.2px;
+    text-shadow: 0px 2px 10px rgba(10, 6, 2, 0.5);
 }
 
 /* Navigation items outer container. */
 #settingsNavItemsContainer {
-    height: 85%;
+    flex: 1 1 auto;
     display: flex;
-    justify-content: center;
     box-sizing: border-box;
 }
 
 /* Navigation items content container. */
 #settingsNavItemsContent {
-    height: 100%;
+    flex: 1 1 auto;
+    width: 100%;
     display: flex;
     flex-direction: column;
+    row-gap: 2px;
     position: relative;
 }
 
 /* Navigation item shared styles. */
 .settingsNavItem {
+    display: block;
+    width: 100%;
     background: none;
     border: none;
     text-align: left;
-    margin: 5px 0px;
-    padding: 0px 20px;
-    color: grey;
+    margin: 0px;
+    padding: 9px 14px;
+    border-radius: 11px;
+    font-family: 'Pretendard Medium', 'Avenir Medium';
+    font-size: 14px;
+    letter-spacing: -0.1px;
+    color: rgba(244, 234, 218, 0.62);
     cursor: pointer;
     outline: none;
-    transition: 0.25s ease;
+    position: relative;
+    transition: 0.18s ease;
 }
 .settingsNavItem:hover,
 .settingsNavItem:focus {
-    color: #c1c1c1;
-    text-shadow: 0px 0px 20px #c1c1c1;
+    background: rgba(239, 228, 208, 0.08);
+    color: #F4EADA;
+}
+.settingsNavItem:focus-visible {
+    outline: 2px solid #FFD9A0;
+    outline-offset: -2px;
 }
 .settingsNavItem[selected] {
     cursor: default;
-    color: white;
-    text-shadow: none;
+    color: #F7EEDD;
+    font-weight: 600;
+    background: rgba(255, 217, 160, 0.12);
+}
+.settingsNavItem[selected]::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 7px;
+    bottom: 7px;
+    width: 3px;
+    border-radius: 2px;
+    background: #FFD9A0;
+    box-shadow: 0 0 8px rgba(255, 217, 160, 0.5);
 }
 
 /* Div to add some space between nav items. */
 .settingsNavSpacer {
-    height: 25px;
+    height: 14px;
 }
 
-/* Content container for the done button. */
+/* Content container for the done button — pinned to the bottom of the rail. */
 #settingsNavContentBottom {
-    position: absolute;
-    top: 65%;
+    margin-top: auto;
 }
 
 /* Settings navigational divider. */
 .settingsNavDivider {
-    width: 75%;
+    width: 100%;
     height: 1px;
-    background: rgba(126, 126, 126, 0.57);
-    margin-left: auto;
-    margin-bottom: 25px;
+    background: rgba(239, 228, 208, 0.13);
+    margin: 0px 0px 16px 0px;
 }
 
-/* Settings done button styles. */
+/* Settings done button — cream "PLAY" primary. */
 #settingsNavDone {
-    background: none;
-    border: none;
-    text-align: left;
-    margin: 5px 0px;
-    padding: 0px 20px;
-    color: white;
+    width: 100%;
+    height: 46px;
+    border-radius: 13px;
+    background: linear-gradient(180deg, #F6EDDD 0%, #E8DAC0 100%);
+    color: #432F1B;
+    font-family: 'Avenir Heavy', 'Avenir Medium', 'Pretendard Medium';
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 8px 22px rgba(10, 6, 2, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.65), inset 0 -2px 0 rgba(71, 52, 30, 0.18);
     cursor: pointer;
     outline: none;
-    transition: 0.25s ease;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease, background 0.15s ease;
 }
 #settingsNavDone:hover,
 #settingsNavDone:focus {
-    text-shadow: 0px 0px 20px white, 0px 0px 20px white, 0px 0px 20px white;
+    transform: translateY(-1px);
+    filter: brightness(1.03);
+}
+#settingsNavDone:focus-visible {
+    outline: 2px solid #FFD9A0;
+    outline-offset: 3px;
 }
 #settingsNavDone:active {
-    text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.75), 0px 0px 20px rgba(255, 255, 255, 0.75), 0px 0px 20px rgba(255, 255, 255, 0.75);
-    color: rgba(255, 255, 255, 0.75);
+    transform: translateY(1px);
+    background: #E0D0B2;
 }
 #settingsNavDone:disabled {
-    color: rgba(255, 255, 255, 0.75);
+    background: rgba(80, 62, 40, 0.45);
+    color: rgba(244, 234, 218, 0.40);
+    border-color: rgba(239, 228, 208, 0.10);
+    box-shadow: none;
+    transform: none;
     pointer-events: none;
 }
 
@@ -1185,6 +1356,7 @@ body, button {
     height: 100%;
     width: 75%;
     box-sizing: border-box;
+    padding-left: 50px;
 }
 
 /* Settings tab shared styles. */
@@ -1201,7 +1373,7 @@ body, button {
 }
 .settingsTab::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.50);
+    box-shadow: inset 0 0 10px rgba(255, 217, 160, 0.45);
 }
 
 /* Add spacing to the top of each settings tab. */
@@ -1218,21 +1390,28 @@ body, button {
 .settingsTabHeader {
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
 }
 .settingsTabHeaderText {
-    font-size: 20px;
-    font-family: 'Avenir Medium';
+    font-size: 24px;
+    font-family: 'Pretendard Medium', 'Avenir Medium';
+    color: #F7EEDD;
+    letter-spacing: -0.3px;
+    text-shadow: 0px 2px 12px rgba(10, 6, 2, 0.55);
 }
 .settingsTabHeaderDesc {
-    font-size: 12px;
+    font-size: 12.5px;
+    font-family: 'Pretendard', 'Avenir Book';
+    color: rgba(244, 234, 218, 0.62);
+    margin-top: 4px;
+    line-height: 1.5;
 }
 
 /* Selected server content container */
 .settingsSelServContainer {
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(30, 21, 12, 0.5);
     width: 75%;
-    border-radius: 3px;
+    border-radius: 10px;
     display: flex;
     justify-content: space-between;
     margin: 15px 0px;
@@ -1243,7 +1422,8 @@ body, button {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    padding: 5px 0px;
+    gap: 14px;
+    padding: 14px 18px;
 }
 
 /* Wrapper container for the switch server button. */
@@ -1256,26 +1436,25 @@ body, button {
 /* Button to switch server configurations on the mods tab. */
 .settingsSwitchServerButton {
     opacity: 0;
-    border: 1px solid rgb(255, 255, 255);
-    color: rgb(255, 255, 255);
-    background: none;
+    border: 1px solid rgba(239, 228, 208, 0.18);
+    color: #F4EADA;
+    background: rgba(239, 228, 208, 0.08);
     font-size: 12px;
-    border-radius: 3px;
-    font-family: 'Avenir Medium';
-    transition: 0.25s ease;
+    border-radius: 10px;
+    padding: 5px 12px;
+    font-family: 'Pretendard Medium', 'Avenir Medium';
+    transition: 0.18s ease;
     cursor: pointer;
     outline: none;
 }
 .settingsSwitchServerButton:hover,
 .settingsSwitchServerButton:focus {
-    box-shadow: 0px 0px 20px rgb(255, 255, 255);
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(239, 228, 208, 0.12);
+    color: #FFD9A0;
 }
 .settingsSwitchServerButton:active {
-    box-shadow: 0px 0px 20px rgb(187, 187, 187);
-    background: rgba(187, 187, 187, 0.25);
-    border: 1px solid rgb(187, 187, 187);
-    color: rgb(187, 187, 187);
+    background: rgba(239, 228, 208, 0.16);
+    color: #E0C795;
 }
 .settingsSelServContainer:hover .settingsSwitchServerButton {
     opacity: 1;
@@ -1289,22 +1468,25 @@ body, button {
 /* Default styles for text/number inputs. */
 #settingsContainer input[type=number],
 #settingsContainer input[type=text] {
-    color: white;
-    background: rgba(0, 0, 0, 0.25);
-    border-radius: 3px;
-    border: 1px solid rgba(126, 126, 126, 0.57);
-    font-family: 'Avenir Book';
-    transition: 0.25s ease;
+    color: #F4EADA;
+    background: rgba(24, 17, 10, 0.50);
+    border-radius: 10px;
+    border: 1px solid rgba(239, 228, 208, 0.14);
+    font-family: 'Avenir Book', 'Pretendard';
+    padding: 8px 12px;
+    transition: 0.18s ease;
 }
 #settingsContainer input[type=number]:focus,
 #settingsContainer input[type=text]:focus {
     outline: none;
-    border-color: rgba(126, 126, 126, 0.87);
+    border-color: #FFD9A0;
+    box-shadow: 0 0 0 2px rgba(255, 217, 160, 0.25);
 }
-#settingsContainer input[type=number][error] {
-    border-color: rgb(255, 27, 12);
-    background: rgba(236, 0, 0, 0.25);
-    color: rgb(255, 27, 12);
+#settingsContainer input[type=number][error],
+#settingsContainer input[type=text][error] {
+    border-color: #D27A5A;
+    background: rgba(210, 122, 90, 0.16);
+    color: #E08A66;
 }
 
 /* Styles for a generic settings entry. */
@@ -1314,7 +1496,7 @@ body, button {
     justify-content: space-between;
     padding: 20px 0px;
     width: 75%;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.50);
+    border-bottom: 1px solid rgba(239, 228, 208, 0.13);
 }
 .settingsFieldLeft {
     display: flex;
@@ -1322,12 +1504,12 @@ body, button {
 }
 .settingsFieldTitle {
     font-size: 14px;
-    font-family: 'Avenir Medium';
-    color: rgba(255, 255, 255, 0.95);
+    font-family: 'Pretendard Medium', 'Avenir Medium';
+    color: #F4EADA;
 }
 .settingsFieldDesc {
     font-size: 12px;
-    color: rgba(255, 255, 255, .95);
+    color: rgba(244, 234, 218, 0.55);
     margin-top: 5px;
 }
 .settingsDivider {
@@ -1355,10 +1537,10 @@ body, button {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(255, 255, 255, 0.35);
+    background-color: rgba(239, 228, 208, 0.18);
     transition: .4s;
     border-radius: 50px;
-    border: 1px solid rgba(126, 126, 126, 0.57);
+    border: 1px solid rgba(239, 228, 208, 0.20);
 }
 .toggleSwitchSlider:before {
     position: absolute;
@@ -1367,15 +1549,14 @@ body, button {
     width: 16px;
     left: 3px;
     bottom: 3px;
-    background-color: white;
-    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.75);
+    background-color: #F4EADA;
+    box-shadow: 0px 1px 3px 0px rgba(10, 6, 2, 0.6);
     border-radius: 50px;
     transition: .4s;
 }
 input:checked + .toggleSwitchSlider {
-    background-color: rgb(31, 140, 11);
-    /* box-shadow: inset 2px 1px 20px black; */
-    border: 1px solid rgb(31, 140, 11);
+    background-color: #9CCB72;
+    border: 1px solid #9CCB72;
 }
 input:checked + .toggleSwitchSlider:before {
     transform: translateX(15px);
@@ -1386,13 +1567,13 @@ input:checked + .toggleSwitchSlider:before {
     width: 35%;
     height: 5px;
     margin: 15px 0px;
-    background: grey;
-    border-radius: 3px;
+    background: rgba(239, 228, 208, 0.18);
+    border-radius: 10px;
     position: relative;
 }
 .rangeSliderBar {
     position: absolute;
-    background: #8be88b;
+    background: linear-gradient(90deg, #E9DCC3, #FFD9A0);
     width: 50%;
     height: 5px;
     border-radius: 3px 0px 0px 3px;
@@ -1403,8 +1584,9 @@ input:checked + .toggleSwitchSlider:before {
     top: -7.5px;
     width: 7px;
     height: 20px;
-    background: white;
-    border-radius: 3px;
+    background: #F6EDDD;
+    border-radius: 4px;
+    box-shadow: 0px 2px 6px rgba(10, 6, 2, 0.5);
     left: 50%;
     cursor: ew-resize;
 }
@@ -1415,7 +1597,7 @@ input:checked + .toggleSwitchSlider:before {
 .settingsFileSelContainer {
     display: flex;
     flex-direction: column;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.50);
+    border-bottom: 1px solid rgba(239, 228, 208, 0.13);
     margin-bottom: 20px;
     margin-top: 20px;
     width: 75%;
@@ -1436,8 +1618,8 @@ input:checked + .toggleSwitchSlider:before {
 .settingsFileSelIcon {
     display: flex;
     align-items: center;
-    background: rgba(126, 126, 126, 0.57);
-    border-radius: 3px 0px 0px 3px;
+    background: rgba(239, 228, 208, 0.10);
+    border-radius: 10px 0px 0px 10px;
     padding: 5px;
     transition: 0.25s ease;
 }
@@ -1456,25 +1638,28 @@ input:checked + .toggleSwitchSlider:before {
     height: 30px;
 }
 
-/* File selection button. */
+/* File selection button — ghost glass. */
 .settingsFileSelButton {
-    border: 0px;
-    border-radius: 0px 3px 3px 0px;
+    border: 1px solid rgba(239, 228, 208, 0.18);
+    border-radius: 0px 10px 10px 0px;
     font-size: 12px;
-    padding: 0px 5px;
+    padding: 0px 14px;
+    color: #F4EADA;
+    font-family: 'Pretendard Medium', 'Avenir Medium';
     cursor: pointer;
-    background: rgba(126, 126, 126, 0.57);
-    transition: 0.25s ease;
+    background: rgba(239, 228, 208, 0.08);
+    transition: 0.18s ease;
     white-space: nowrap;
     outline: none;
 }
 .settingsFileSelButton:hover,
 .settingsFileSelButton:focus {
-    text-shadow: 0px 0px 20px white;
+    background: rgba(239, 228, 208, 0.12);
+    color: #FFD9A0;
 }
 .settingsFileSelButton:active {
-    text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.75);
-    color: rgba(255, 255, 255, 0.75);
+    background: rgba(239, 228, 208, 0.16);
+    color: #E0C795;
 }
 
 /* Description for the file selector. */
@@ -1485,7 +1670,7 @@ input:checked + .toggleSwitchSlider:before {
     width: 89%;
 }
 .settingsFileSelDesc strong {
-    font-family: 'Avenir Medium';
+    font-family: 'Avenir Medium', 'Pretendard Medium';
 }
 
 /* * *
@@ -1504,8 +1689,12 @@ input:checked + .toggleSwitchSlider:before {
     width: 100%;
     justify-content: space-between;
     padding: 10px 0px;
-    border-bottom: 1px solid #ffffff85;
+    border-bottom: 1px solid rgba(239, 228, 208, 0.13);
     margin-bottom: 30px;
+}
+.settingsAuthAccountTypeHeaderLeft span {
+    color: #F4EADA;
+    font-family: 'Pretendard Medium', 'Avenir Medium';
 }
 
 .settingsAuthAccountTypeHeaderLeft {
@@ -1513,27 +1702,31 @@ input:checked + .toggleSwitchSlider:before {
     column-gap: 5px;
 }
 
-/* Settings add account button styles. */
+/* Settings add account button — ghost chip. */
 .settingsAddAuthAccount {
-    background: none;
-    border: none;
+    background: rgba(239, 228, 208, 0.08);
+    border: 1px solid rgba(239, 228, 208, 0.18);
     text-align: left;
-    padding: 2px 0px;
-    color: white;
+    padding: 6px 14px;
+    border-radius: 11px;
+    font-family: 'Pretendard Medium', 'Avenir Medium';
+    font-size: 13px;
+    color: #F4EADA;
     cursor: pointer;
     outline: none;
-    transition: 0.25s ease;
+    transition: 0.18s ease;
 }
 .settingsAddAuthAccount:hover,
 .settingsAddAuthAccount:focus {
-    text-shadow: 0px 0px 20px white, 0px 0px 20px white, 0px 0px 20px white;
+    background: rgba(239, 228, 208, 0.12);
+    color: #FFD9A0;
 }
 .settingsAddAuthAccount:active {
-    text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.75), 0px 0px 20px rgba(255, 255, 255, 0.75), 0px 0px 20px rgba(255, 255, 255, 0.75);
-    color: rgba(255, 255, 255, 0.75);
+    background: rgba(239, 228, 208, 0.16);
+    color: #E0C795;
 }
 .settingsAddAuthAccount:disabled {
-    color: rgba(255, 255, 255, 0.75);
+    color: rgba(244, 234, 218, 0.40);
     pointer-events: none;
 }
 
@@ -1548,12 +1741,19 @@ input:checked + .toggleSwitchSlider:before {
     margin-top: 10px;
 }
 
-/* Auth account shared styles. */
+/* Auth account shared styles — glass card. */
 .settingsAuthAccount {
     display: flex;
-    background: rgba(0, 0, 0, 0.25);
-    border-radius: 3px;
-    border: 1px solid rgba(126, 126, 126, 0.57);
+    background: linear-gradient(165deg, rgba(47, 33, 19, 0.55), rgba(26, 18, 10, 0.66));
+    backdrop-filter: blur(14px) saturate(1.15);
+    border-radius: 15px;
+    border: 1px solid rgba(239, 228, 208, 0.14);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 246, 229, 0.07);
+    overflow: hidden;
+    transition: 0.18s ease;
+}
+.settingsAuthAccount:hover {
+    border-color: rgba(239, 228, 208, 0.22);
 }
 
 /* Left hand side of an auth account element, for the skin image. */
@@ -1590,13 +1790,14 @@ input:checked + .toggleSwitchSlider:before {
     flex-direction: column;
 }
 .settingsAuthAccountDetailTitle {
-    font-size: 12px;
-    color: grey;
-    font-weight: bold;
-    font-family: 'Avenir Medium';
+    font-size: 11px;
+    color: rgba(244, 234, 218, 0.55);
+    font-weight: normal;
+    font-family: 'Pretendard Medium', 'Avenir Medium';
 }
 .settingsAuthAccountDetailValue {
     font-size: 14px;
+    color: #F4EADA;
     -webkit-user-select: initial;
 }
 
@@ -1606,22 +1807,27 @@ input:checked + .toggleSwitchSlider:before {
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-end;
-    padding: 10px;
+    gap: 14px;
+    padding: 12px;
 }
 
-/* Account select button shared styles. */
+/* Account select button — ghost amber; in-use account turns leaf green. */
 .settingsAuthAccountSelect {
     opacity: 0;
-    border: none;
+    padding: 6px 14px;
+    border-radius: 11px;
+    border: 1px solid rgba(255, 217, 160, 0.45);
+    background: rgba(255, 217, 160, 0.10);
+    color: #FFD9A0;
     white-space: nowrap;
-    background: none;
-    font-family: 'Avenir Medium';
+    font-family: 'Pretendard Medium', 'Avenir Medium';
+    font-size: 13px;
     outline: none;
-    transition: 0.25s ease;
+    transition: 0.18s ease;
 }
 .settingsAuthAccountSelect:hover:not([selected]),
 .settingsAuthAccountSelect:focus:not([selected]) {
-    text-shadow: 0px 0px 20px white, 0px 0px 20px white;
+    background: rgba(255, 217, 160, 0.18);
     cursor: pointer;
 }
 .settingsAuthAccount:hover .settingsAuthAccountSelect:not([selected]),
@@ -1630,31 +1836,34 @@ input:checked + .toggleSwitchSlider:before {
 }
 .settingsAuthAccountSelect[selected] {
     pointer-events: none;
+    border: 1px solid rgba(156, 203, 114, 0.5);
+    background: rgba(156, 203, 114, 0.16);
+    color: #9CCB72;
 }
 
-/* Account logout button shared styles. */
+/* Account logout button — ghost clay (warm danger, no glow). */
 .settingsAuthAccountLogOut {
     opacity: 0;
-    border: 1px solid rgb(241, 55, 55);
-    color: rgb(241, 55, 55);
-    background: none;
-    font-size: 12px;
-    border-radius: 3px;
-    font-family: 'Avenir Medium';
-    transition: 0.25s ease;
+    padding: 6px 14px;
+    border: 1px solid rgba(210, 122, 90, 0.5);
+    color: #D27A5A;
+    background: transparent;
+    font-size: 13px;
+    border-radius: 11px;
+    font-family: 'Pretendard Medium', 'Avenir Medium';
+    transition: 0.18s ease;
     cursor: pointer;
     outline: none;
 }
 .settingsAuthAccountLogOut:hover,
 .settingsAuthAccountLogOut:focus {
-    box-shadow: 0px 0px 20px rgb(241, 55, 55);
-    background: rgba(241, 55, 55, 0.25);
+    background: rgba(210, 122, 90, 0.16);
+    color: #E08A66;
 }
 .settingsAuthAccountLogOut:active {
-    box-shadow: 0px 0px 20px rgb(185, 47, 47);
-    background: rgba(185, 47, 47, 0.25);
-    border: 1px solid rgb(185, 47, 47);
-    color: rgb(185, 47, 47);
+    background: rgba(210, 122, 90, 0.24);
+    border: 1px solid rgba(210, 122, 90, 0.7);
+    color: #E08A66;
 }
 .settingsAuthAccount:hover .settingsAuthAccountLogOut {
     opacity: 1;
@@ -1669,7 +1878,7 @@ input:checked + .toggleSwitchSlider:before {
     display: flex;
     flex-direction: column;
     padding-bottom: 20px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.50);
+    border-bottom: 1px solid rgba(239, 228, 208, 0.13);
     width: 75%;
 }
 #settingsGameResolutionContent {
@@ -1678,7 +1887,7 @@ input:checked + .toggleSwitchSlider:before {
     padding-top: 10px;
 }
 #settingsGameResolutionCross {
-    color: grey;
+    color: rgba(244, 234, 218, 0.55);
     padding: 0px 15px;
 }
 #settingsGameWidth,
@@ -1699,7 +1908,7 @@ input:checked + .toggleSwitchSlider:before {
 /* Mod sub-container header text. */
 .settingsModsHeader {
     padding-bottom: 10px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    border-bottom: 1px solid rgba(239, 228, 208, 0.13);
     margin-bottom: 10px;
 }
 
@@ -1715,8 +1924,8 @@ input:checked + .toggleSwitchSlider:before {
 #settingsOptModsContent,
 #settingsDropinModsContent {
     font-size: 12px;
-    background: rgba(0, 0, 0, 0.25);
-    border-radius: 3px;
+    background: rgba(30, 21, 12, 0.5);
+    border-radius: 10px;
     color: white;
 }
 
@@ -1728,7 +1937,7 @@ input:checked + .toggleSwitchSlider:before {
 .settingsSubMod {
     padding: 10px 0px 10px 15px;
     margin-left: 20px;
-    border-left: 1px solid rgba(255, 255, 255, 0.5);
+    border-left: 1px solid rgba(239, 228, 208, 0.13);
 }
 
 /* Main content container for mod element information. */
@@ -1763,7 +1972,7 @@ input:checked + .toggleSwitchSlider:before {
 
 /* The version of the mod. */
 .settingsModVersion {
-    color: grey;
+    color: rgba(244, 234, 218, 0.55);
     font-size: 10px;
 }
 
@@ -1802,27 +2011,41 @@ input:checked + .toggleSwitchSlider:before {
 
 /* Button to open the mods folder for drop-in mods. */
 #settingsDropinFileSystemButton {
-    background: rgba(0, 0, 0, 0.25);
-    border: 1px solid rgba(126, 126, 126, 0.57);
-    border-radius: 3px;
+    background: rgba(30, 21, 12, 0.5);
+    border: 1px solid rgba(239, 228, 208, 0.14);
+    border-radius: 10px;
     height: 50px;
     width: 100%;
-    text-align: left;
-    padding: 0px 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #F4EADA;
+    font-family: 'Pretendard Medium', 'Avenir Medium';
+    font-size: 14px;
     cursor: pointer;
     outline: none;
-    transition: 0.25s ease;
+    transition: 0.18s ease;
     margin-bottom: 10px;
 }
 #settingsDropinFileSystemButton:hover,
 #settingsDropinFileSystemButton:focus,
 #settingsDropinFileSystemButton[drag] {
-    background: rgba(54, 54, 54, 0.25);
-    text-shadow: 0px 0px 20px white;
+    background: rgba(239, 228, 208, 0.10);
+    color: #FFD9A0;
+}
+/* The "+" affordance for the add-mods drop zone. */
+#settingsDropinFileSystemButton::before {
+    content: '+';
+    font-family: 'Avenir Medium', 'Pretendard Medium';
+    font-size: 19px;
+    color: #FFD9A0;
+    line-height: 1;
 }
 /* Refresh instructions on the file system button. */
 #settingsDropinRefreshNote {
     font-size: 10px;
+    color: rgba(244, 234, 218, 0.5);
     pointer-events: none;
 }
 
@@ -1864,9 +2087,9 @@ input:checked + .toggleSwitchSlider:before {
 
 /* Button to add shaderpacks. */
 #settingsShaderpackButton {
-    background: rgba(0, 0, 0, 0.25);
-    border: 1px solid rgba(126, 126, 126, 0.57);
-    border-radius: 3px;
+    background: rgba(30, 21, 12, 0.5);
+    border: 1px solid rgba(239, 228, 208, 0.14);
+    border-radius: 10px;
     cursor: pointer;
     outline: none;
     transition: 0.25s ease;
@@ -1877,8 +2100,8 @@ input:checked + .toggleSwitchSlider:before {
 #settingsShaderpackButton:hover,
 #settingsShaderpackButton:focus,
 #settingsShaderpackButton[drag] {
-    background: rgba(54, 54, 54, 0.25);
-    text-shadow: 0px 0px 20px white;
+    background: rgba(239, 228, 208, 0.10);
+    color: #FFD9A0;
 }
 
 /* Main select container. */
@@ -1889,7 +2112,7 @@ input:checked + .toggleSwitchSlider:before {
 
 /* Div which displays the selected option. */
 .settingsSelectSelected {
-    border-radius: 3px;
+    border-radius: 10px;
     border-width: 1px;
     font-size: 14px;
     padding: 6px 16px;
@@ -1904,12 +2127,12 @@ input:checked + .toggleSwitchSlider:before {
     width: 0;
     height: 0;
     border: 6px solid transparent;
-    border-color: rgba(126, 126, 126, 0.57) transparent transparent transparent;
+    border-color: rgba(239, 228, 208, 0.14) transparent transparent transparent;
 }
 
 /* Point the arrow upwards when the select box is open (active). */
 .settingsSelectSelected.select-arrow-active:after {
-    border-color: transparent transparent rgba(126, 126, 126, 0.57) transparent;
+    border-color: transparent transparent rgba(239, 228, 208, 0.14) transparent;
     top: 7px;
 }
 .settingsSelectSelected.select-arrow-active {
@@ -1925,7 +2148,7 @@ input:checked + .toggleSwitchSlider:before {
     z-index: 99;
     max-height: 300%;
     overflow-y: scroll;
-    border: 1px solid rgba(126, 126, 126, 0.57);
+    border: 1px solid rgba(239, 228, 208, 0.14);
     border-top: none;
     border-radius: 0px 0px 3px 3px;
 }
@@ -1941,15 +2164,15 @@ input:checked + .toggleSwitchSlider:before {
 }
 .settingsSelectOptions::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.50);
+    box-shadow: inset 0 0 10px rgba(239, 228, 208, 0.13);
 }
 
 /* Shared styles between options and selection div. */
 .settingsSelectOptions div,
 .settingsSelectSelected {
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(30, 21, 12, 0.5);
     border-style: solid;
-    border-color: rgba(126, 126, 126, 0.57);
+    border-color: rgba(239, 228, 208, 0.14);
     color: #ffffff;
     cursor: pointer;
 }
@@ -1994,7 +2217,7 @@ input:checked + .toggleSwitchSlider:before {
     width: 75%;
     display: flex;
     flex-direction: column;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.50);
+    border-bottom: 1px solid rgba(239, 228, 208, 0.13);
     margin-bottom: 20px;
 }
 
@@ -2002,7 +2225,7 @@ input:checked + .toggleSwitchSlider:before {
 #settingsMemoryTitle {
     margin-bottom: 10px;
     padding-bottom: 5px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    border-bottom: 1px solid rgba(239, 228, 208, 0.13);
 }
 
 /* Memory management content. */
@@ -2036,6 +2259,9 @@ input:checked + .toggleSwitchSlider:before {
 .settingsMemoryLabel {
     font-size: 14px;
     margin-right: 2%;
+    color: #FFD9A0;
+    font-family: 'Avenir Heavy', 'Avenir Medium', 'Pretendard Medium';
+    font-variant-numeric: tabular-nums;
 }
 
 /* Range sliders for min and max memory settings. */
@@ -2059,12 +2285,13 @@ input:checked + .toggleSwitchSlider:before {
 }
 .settingsMemoryStatusTitle {
     font-size: 12px;
-    color: grey;
+    color: rgba(244, 234, 218, 0.55);
     font-weight: bold;
 }
 .settingsMemoryStatusValue {
-    color: lightgrey;
+    color: #FFD9A0;
     font-size: 16px;
+    font-variant-numeric: tabular-nums;
 }
 
 /* Description for memory management. */
@@ -2078,7 +2305,7 @@ input:checked + .toggleSwitchSlider:before {
 /* Status text which displays details on the selected executable. */
 #settingsJavaExecDetails {
     font-weight: bold;
-    color: grey;
+    color: rgba(244, 234, 218, 0.55);
     font-size: 12px;
 }
 
@@ -2106,7 +2333,7 @@ input:checked + .toggleSwitchSlider:before {
     font-size: 12px;
 }
 #settingsJVMOptsContent:focus-within > .settingsJavaIcon {
-    background: rgba(126, 126, 126, 0.87);
+    background: rgba(239, 228, 208, 0.14);
 }
 
 /* Description for the JVM options setting. */
@@ -2135,9 +2362,9 @@ input:checked + .toggleSwitchSlider:before {
 #settingsAboutCurrentContainer {
     display: flex;
     flex-direction: column;
-    background: rgba(0, 0, 0, 0.25);
-    border: 1px solid rgba(126, 126, 126, 0.57);
-    border-radius: 3px;
+    background: rgba(30, 21, 12, 0.5);
+    border: 1px solid rgba(239, 228, 208, 0.14);
+    border-radius: 10px;
     width: 75%;
     margin-bottom: 20px;
 }
@@ -2154,7 +2381,7 @@ input:checked + .toggleSwitchSlider:before {
     display: flex;
     align-items: center;
     padding-bottom: 5px;
-    border-bottom: 1px solid rgba(126, 126, 126, 0.57);
+    border-bottom: 1px solid rgba(239, 228, 208, 0.14);
 }
 #settingsAboutLogo {
     width: 30px;
@@ -2164,6 +2391,9 @@ input:checked + .toggleSwitchSlider:before {
 #settingsAboutTitle {
     font-size: 23px;
     padding-left: 10px;
+    font-family: 'Avenir Black', 'Avenir Heavy', 'Avenir Medium';
+    font-weight: 900;
+    color: #F7EEDD;
 }
 
 /* Current version container. */
@@ -2176,7 +2406,7 @@ input:checked + .toggleSwitchSlider:before {
 /* Checkmark next to the version information. */
 #settingsAboutCurrentVersionCheck {
     border-radius: 50%;
-    background: #23aa23;
+    background: #9CCB72;
     text-align: center;
     font-weight: bold;
     margin: 11px 12px;
@@ -2195,15 +2425,15 @@ input:checked + .toggleSwitchSlider:before {
 /* Release type text. */
 #settingsAboutCurrentVersionTitle {
     font-size: 12px;
-    font-family: 'Avenir Medium';
-    color: #23aa23;
+    font-family: 'Avenir Medium', 'Pretendard Medium';
+    color: #9CCB72;
     font-weight: bold;
 }
 
 /* Current version text. */
 #settingsAboutCurrentVersionLine {
     font-size: 10px;
-    color: grey;
+    color: rgba(244, 234, 218, 0.55);
     font-weight: bold;
 }
 
@@ -2217,7 +2447,7 @@ input:checked + .toggleSwitchSlider:before {
     background: none;
     border: none;
     font-size: 10px;
-    color: grey;
+    color: rgba(244, 234, 218, 0.55);
     padding: 0px 5px;
     transition: 0.25s ease;
     outline: none;
@@ -2235,9 +2465,9 @@ input:checked + .toggleSwitchSlider:before {
 .settingsChangelogContainer {
     display: flex;
     flex-direction: column;
-    background: rgba(0, 0, 0, 0.25);
-    border: 1px solid rgba(126, 126, 126, 0.57);
-    border-radius: 3px;
+    background: rgba(30, 21, 12, 0.5);
+    border: 1px solid rgba(239, 228, 208, 0.14);
+    border-radius: 10px;
     width: 75%;
     margin-bottom: 20px;
 }
@@ -2253,12 +2483,12 @@ input:checked + .toggleSwitchSlider:before {
 .settingsChangelogHeadline {
     padding-bottom: 10px;
     margin-bottom: 10px;
-    border-bottom: 1px solid rgba(126, 126, 126, 0.57);
+    border-bottom: 1px solid rgba(239, 228, 208, 0.14);
 }
 /* Changelog header label. */
 .settingsChangelogLabel {
     font-size: 12px;
-    color: grey;
+    color: rgba(244, 234, 218, 0.55);
     font-weight: bold;
 }
 
@@ -2273,7 +2503,7 @@ input:checked + .toggleSwitchSlider:before {
     line-height: 1.5;
 }
 .settingsChangelogText blockquote {
-    border-left: 0.25em solid rgba(126, 126, 126, 0.95);
+    border-left: 0.25em solid rgba(239, 228, 208, 0.22);
     margin: 0px;
     padding: 0 0 0 1em;
     color: rgba(255, 255, 255, 0.85);
@@ -2283,8 +2513,8 @@ input:checked + .toggleSwitchSlider:before {
     font-size: 85%;
     background-color: rgba(255, 255, 255, 0.25);
     color: white;
-    border-radius: 3px;
-    font-family: 'Avenir Book';
+    border-radius: 10px;
+    font-family: 'Avenir Book', 'Pretendard';
 }
 .settingsChangelogText li+li {
     margin-top: .25em;
@@ -2302,7 +2532,7 @@ input:checked + .toggleSwitchSlider:before {
     padding: 0.1em 0.4em;
     font-size: 86%;
     background-color: white;
-    border-radius: 3px;
+    border-radius: 10px;
     color: black;
     font-weight: bold;
 }
@@ -2337,9 +2567,9 @@ input:checked + .toggleSwitchSlider:before {
 #settingsUpdateStatusContainer {
     display: flex;
     flex-direction: column;
-    background: rgba(0, 0, 0, 0.25);
-    border: 1px solid rgba(126, 126, 126, 0.57);
-    border-radius: 3px;
+    background: rgba(30, 21, 12, 0.5);
+    border: 1px solid rgba(239, 228, 208, 0.14);
+    border-radius: 10px;
     width: 75%;
     margin-bottom: 20px;
 }
@@ -2356,7 +2586,7 @@ input:checked + .toggleSwitchSlider:before {
     display: flex;
     align-items: center;
     padding-bottom: 5px;
-    border-bottom: 1px solid rgba(126, 126, 126, 0.57);
+    border-bottom: 1px solid rgba(239, 228, 208, 0.14);
 }
 #settingsUpdateTitle {
     font-size: 16px;
@@ -2369,13 +2599,13 @@ input:checked + .toggleSwitchSlider:before {
     display: flex;
     align-items: center;
     padding: 10px 0px;
-    border-bottom: 1px solid rgba(126, 126, 126, 0.57);
+    border-bottom: 1px solid rgba(239, 228, 208, 0.14);
 }
 
 /* Checkmark next to the version information. */
 #settingsUpdateVersionCheck {
     border-radius: 50%;
-    background: #23aa23;
+    background: #9CCB72;
     text-align: center;
     font-weight: bold;
     margin: 11px 12px;
@@ -2394,15 +2624,15 @@ input:checked + .toggleSwitchSlider:before {
 /* Release type text. */
 #settingsUpdateVersionTitle {
     font-size: 12px;
-    font-family: 'Avenir Medium';
-    color: #23aa23;
+    font-family: 'Avenir Medium', 'Pretendard Medium';
+    color: #9CCB72;
     font-weight: bold;
 }
 
 /* Current version text. */
 #settingsUpdateVersionLine {
     font-size: 10px;
-    color: grey;
+    color: rgba(244, 234, 218, 0.55);
     font-weight: bold;
 }
 
@@ -2429,11 +2659,10 @@ input:checked + .toggleSwitchSlider:before {
 }
 #settingsUpdateActionButton:hover,
 #settingsUpdateActionButton:focus {
-    text-shadow: 0px 0px 20px white, 0px 0px 20px white, 0px 0px 20px white;
+    color: #FFD9A0;
 }
 #settingsUpdateActionButton:active {
-    text-shadow: 0px 0px 20px #c7c7c7, 0px 0px 20px #c7c7c7, 0px 0px 20px #c7c7c7;
-    color: #c7c7c7;
+    color: #E0C795;
 }
 #settingsUpdateActionButton:disabled {
     pointer-events: none;
@@ -2453,394 +2682,61 @@ input:checked + .toggleSwitchSlider:before {
     overflow-y: hidden;
 }
 
-/* Upper content container. */
+/* Upper content container. Hosts only the profile pill (top-right) and the
+   hero lockup (bottom-left); the rest is open canvas for the background.
+   The top scrim keeps the frame bar / profile pill legible over bright skies. */
 #landingContainer > #upper {
     position: relative;
     transition: top 2s ease;
     top: 0px;
-    height: 77%;
-    display: flex;
-}
-#landingContainer > #upper > #left {
-    display: inline-flex;
-    width: 15%;
-    height: 100%;
-    justify-content: flex-end;
-}
-#landingContainer > #upper > #content {
-    display: inline-flex;
-    width: 70%;
-    height: 100%;
-}
-#landingContainer > #upper > #right {
-    display: inline-flex;
-    width: 15%;
-    height: 100%;
+    height: calc(100% - 114px);
+    background: linear-gradient(to bottom, rgba(16, 11, 5, 0.28) 0%, rgba(16, 11, 5, 0) 90px);
 }
 
-/* Lower content container. */
+/* Lower dock area. A decorative glass plate (.dockPlate, inside #left) spans
+   the full width. Two-zone dock: server identity left, PLAY right; #center is
+   collapsed (NEWS removed) but kept in the DOM so #lower still has its three
+   expected children. */
 #landingContainer > #lower {
-    height: 23%;
+    height: 114px;
+    position: relative;
     display: flex;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    background: linear-gradient(to top, rgba(16, 11, 5, 0.50) 0%, rgba(16, 11, 5, 0.22) 55%, rgba(16, 11, 5, 0) 100%);
 }
 #landingContainer > #lower > #left {
     position: relative;
     transition: top 2s ease;
     top: 0px;
     height: 100%;
-    width: 33%;
+    width: 50%;
+    box-sizing: border-box;
     display: inline-flex;
-    justify-content: center;
-}
-#landingContainer > #lower > #left #content {
-    position: relative;
-    top: 25px;
-    display: inline-flex;
-    line-height: 24px;
-    left: 50px;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 46px;
+    padding-bottom: 18px;
 }
 #landingContainer > #lower > #center {
     position: relative;
     transition: top 2s ease;
     top: 0px;
     height: 100%;
-    width: 34%;
-    display: inline-flex;
-    justify-content: center;
-}
-#landingContainer > #lower > #center #content {
-    position: relative;
-    z-index: 500;
-    transition: top 2s ease;
-    top: 10px;
+    width: 0px;
+    padding: 0px;
+    overflow: hidden;
 }
 #landingContainer > #lower > #right {
     position: relative;
     transition: top 2s ease;
     top: 0px;
     height: 100%;
-    width: 33%;
+    width: 50%;
+    box-sizing: border-box;
     display: inline-flex;
-}
-
-/*******************************************************************************
- *                                                                             *
- * Landing View (News Styles)                                                  *
- *                                                                             *
- ******************************************************************************/
-
-/* Main container. */
-#newsContainer {
-    position: absolute;
-    top: 100%;
-    height: 100%;
-    width: 100%;
-    transition: top 2s ease;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-}
-
-/* News content container. */
-#newsContent {
-    height: 82vh;
-    width: 100%;
-    display: flex;
-    -webkit-user-select: initial;
-    position: relative;
-}
-
-/* Drop shadow displayed when content is scrolled out of view. */
-#newsContent:before {
-    content: '';
-    background: linear-gradient(rgba(0, 0, 0, 0.25), transparent);
-    width: 100%;
-    height: 5px;
-    position: absolute;
-    opacity: 0;
-    transition: opacity 0.25s ease;
-}
-#newsContent[scrolled]:before {
-    opacity: 1;
-}
-
-/* News article status container (left). */
-#newsStatusContainer {
-    width: calc(30% - 60px);
-    height: calc(100% - 30px);
-    padding: 15px 15px 15px 45px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: relative;
-}
-
-/* News status content. */
-#newsStatusContent {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-}
-
-/* News title wrapper. */
-#newsTitleContainer {
-    display: flex;
-    max-width: 90%;
-}
-
-/* News article title styles. */
-#newsArticleTitle {
-    font-size: 18px;
-    font-weight: bold;
-    font-family: 'Avenir Medium';
-    color: white;
-    text-decoration: none;
-    transition: 0.25s ease;
-    outline: none;
-    text-align: right;
-}
-#newsArticleTitle:hover,
-#newsArticleTitle:focus {
-    text-shadow: 0px 0px 20px white;
-}
-#newsArticleTitle:active {
-    color: #c7c7c7;
-    text-shadow: 0px 0px 20px #c7c7c7;
-}
-
-/* News meta container. */
-#newsMetaContainer {
-    display: flex;
-    flex-direction: column;
-}
-
-/* Date and author wrappers. */
-#newsArticleDateWrapper,
-#newsArticleAuthorWrapper {
-    display: flex;
     justify-content: flex-end;
-}
-
-/* Date and author shared styles. */
-#newsArticleDate,
-#newsArticleAuthor {
-    display: inline-block;
-    font-size: 10px;
-    padding: 0px 5px;
-    font-weight: bold;
-    border-radius: 2px;
-}
-
-/* Date styles. */
-#newsArticleDate {
-    background: white;
-    color: black;
-    margin-top: 5px;
-}
-
-/* Author styles. */
-#newsArticleAuthor {
-    background: #a02d2a;
-}
-
-/* News article comments styles. */
-#newsArticleComments {
-    margin-top: 5px;
-    display: inline-block;
-    font-size: 10px;
-    color: #ffffff;
-    text-decoration: none;
-    transition: 0.25s ease;
-    outline: none;
-    text-align: right;
-}
-#newsArticleComments:focus,
-#newsArticleComments:hover {
-    color: #e0e0e0;
-}
-#newsArticleComments:active {
-    color: #c7c7c7;
-}
-
-/* Article content container (right). */
-#newsArticleContainer {
-    width: calc(100% - 25px);
-    height: 100%;
-    margin: 0px 0px 0px 25px;
-}
-
-/* Article content styles. */
-#newsArticleContentScrollable {
-    font-size: 12px;
-    overflow-y: scroll;
-    height: 100%;
-    padding: 0px 15px 0px 15px;
-}
-#newsArticleContentScrollable img,
-#newsArticleContentScrollable iframe {
-    max-width: 95%;
-    display: block;
-    margin: 0 auto;
-}
-#newsArticleContentScrollable a {
-    color: rgba(202, 202, 202, 0.75);
-    transition: 0.25s ease;
-    outline: none;
-}
-#newsArticleContentScrollable a:hover,
-#newsArticleContentScrollable a:focus {
-    color: rgba(255, 255, 255, 0.75);
-}
-#newsArticleContentScrollable a:active {
-    color: rgba(165, 165, 165, 0.75);
-}
-#newsArticleContentScrollable::-webkit-scrollbar {
-    width: 2px;
-}
-#newsArticleContentScrollable::-webkit-scrollbar-track {
-    display: none;
-}
-#newsArticleContentScrollable::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.50);
-}
-.bbCodeSpoilerButton {
-    background: none;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    font-size: 16px;
-    transition: 0.25s ease;
-    width: 100%;
-    border-bottom: 1px solid white;
-    padding-bottom: 15px;
-}
-.bbCodeSpoilerButton:hover,
-.bbCodeSpoilerButton:focus {
-    text-shadow: 0px 0px 20px #ffffff, 0px 0px 20px #ffffff, 0px 0px 20px #ffffff;
-}
-.bbCodeSpoilerButton:active {
-    color: #c7c7c7;
-    text-shadow: 0px 0px 20px #c7c7c7, 0px 0px 20px #c7c7c7, 0px 0px 20px #c7c7c7;
-}
-.bbCodeSpoilerText {
-    display: none;
-    padding: 15px 0px;
-    border-bottom: 1px solid white;
-}
-
-
-#newsArticleContentWrapper {
-    width: 80%;
-}
-
-.newsArticleSpacerTop {
-    height: 15px;
-}
-
-/* Div to add spacing at the end of a news article. */
-.newsArticleSpacerBot {
-    height: 30px;
-}
-
-/* News navigation container. */
-#newsNavigationContainer {
-    display: flex;
-    justify-content: center;
     align-items: center;
-    margin-bottom: 10px;
-    -webkit-user-select: none;
-    position: absolute;
-    bottom: 15px;
-    right: 0px;
-}
-
-/* Navigation status span. */
-#newsNavigationStatus {
-    font-size: 12px;
-    margin: 0px 15px;
-}
-
-/* Left and right navigation button styles. */
-#newsNavigateLeft,
-#newsNavigateRight {
-    background: none;
-    border: none;
-    outline: none;
-    height: 20px;
-    cursor: pointer;
-}
-#newsNavigateLeft:hover #newsNavigationLeftSVG,
-#newsNavigateLeft:focus #newsNavigationLeftSVG,
-#newsNavigateRight:hover #newsNavigationRightSVG,
-#newsNavigateRight:focus #newsNavigationRightSVG {
-    -webkit-filter: drop-shadow(0px 0px 2px #fff);
-}
-#newsNavigateLeft:active #newsNavigationLeftSVG .arrowLine,
-#newsNavigateRight:active #newsNavigationRightSVG .arrowLine {
-    stroke: #c7c7c7;
-}
-#newsNavigateLeft:active #newsNavigationLeftSVG,
-#newsNavigateRight:active #newsNavigationRightSVG {
-    -webkit-filter: drop-shadow(0px 0px 2px #c7c7c7);
-}
-#newsNavigateLeft:disabled #newsNavigationLeftSVG .arrowLine,
-#newsNavigateRight:disabled #newsNavigationRightSVG .arrowLine {
-    stroke: rgba(255, 255, 255, 0.75);
-}
-#newsNavigationLeftSVG {
-    transform: rotate(-90deg);
-    width: 15px;
-}
-#newsNavigationRightSVG {
-    transform: rotate(90deg);
-    width: 15px;
-}
-
-/* News error (message) container. */
-#newsErrorContainer {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-}
-#newsErrorFailed {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-}
-
-/* News error content (message). */
-.newsErrorContent {
-    font-size: 20px;
-}
-#newsErrorLoading {
-    display: flex;
-    width: 168.92px;
-}
-#nELoadSpan {
-    white-space: pre;
-}
-/* News error retry button styles. */
-#newsErrorRetry {
-    font-size: 12px;
-    font-weight: bold;
-    cursor: pointer;
-    background: none;
-    border: none;
-    outline: none;
-    transition: 0.25s ease;
-}
-#newsErrorRetry:focus,
-#newsErrorRetry:hover {
-    text-shadow: 0px 0px 20px white;
-}
-#newsErrorRetry:active {
-    color: #c7c7c7;
-    text-shadow: 0px 0px 20px #c7c7c7;
+    padding-right: 46px;
+    padding-bottom: 18px;
 }
 
 /*******************************************************************************
@@ -2850,29 +2746,56 @@ input:checked + .toggleSwitchSlider:before {
  ******************************************************************************/
 
 /* * *
-* Landing View (Top Styles) | Left Content
+* Landing View (Top Styles) | Hero Lockup & Seal
 * * */
 
-/* Logo image. */
+/* Brand hero lockup, bottom-left of the open canvas, seated just above the
+   dock. Slides away with #upper during the news animation. */
+.heroLockup {
+    position: absolute;
+    left: 48px;
+    bottom: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    pointer-events: none;
+    -webkit-user-select: none;
+}
+.heroEyebrow {
+    font-family: 'Avenir Medium', 'Pretendard Medium';
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    color: rgba(244, 234, 218, 0.75);
+    text-shadow: 0px 1px 6px rgba(10, 6, 2, 0.65);
+}
+.heroTitle {
+    font-family: 'Pretendard Medium', 'Avenir Medium';
+    font-size: 32px;
+    line-height: 1.15;
+    color: #F7EEDD;
+    text-shadow: 0px 2px 14px rgba(10, 6, 2, 0.70);
+}
+
+/* Logo seal — now the server emblem inside the dock identity block. */
 #image_seal {
-    height: 70px;
+    height: 52px;
     width: auto;
     position: relative;
-    border: 2px solid white;
-    box-sizing: border-box;
     border-radius: 50%;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.35);
 }
 
 /* Logo container styles. */
 #image_seal_container {
     position: relative;
-    height: 70px;
-    width: 70px;
+    height: 52px;
+    width: 52px;
     border-radius: 50%;
-    margin-top: 50px;
+    flex-shrink: 0;
 }
 
-/* Logo container styles w/ update. */
+/* Logo container styles w/ update (amber glow, brand-warm). */
 #image_seal_container[update]{
     cursor: pointer
 }
@@ -2886,7 +2809,7 @@ input:checked + .toggleSwitchSlider:before {
     top: 0%;
     left: 0%;
     border-radius: 50%;
-    box-shadow: 0 0 15px #43c628;
+    box-shadow: 0 0 14px rgba(255, 180, 84, 0.85);
     animation: glow-grow 4s ease-out infinite;
     background: rgba(0, 0, 0, 0.15);
 }
@@ -2894,35 +2817,37 @@ input:checked + .toggleSwitchSlider:before {
     animation-delay: 2s;
 }
 
-/* Update available tooltip styles. */
+/* Update available tooltip — flipped above the seal (seal sits near the
+   bottom edge now). */
 #updateAvailableTooltip {
     cursor: pointer;
     visibility: hidden;
     opacity: 0;
-    width: 100px;
-    height: 15px;
-    background-color: rgb(0, 0, 0);
-    color: #fff;
+    white-space: nowrap;
+    background-color: rgba(20, 14, 8, 0.92);
+    border: 1px solid rgba(239, 228, 208, 0.18);
+    color: #F4EADA;
     text-align: center;
-    border-radius: 4px;
-    padding: 2px;
+    border-radius: 6px;
+    padding: 4px 10px;
     position: absolute;
     z-index: 1;
-    top: 115%;
-    left: -17.5px;
-    font-family: 'Avenir Medium';
-    font-size: 12px;
+    bottom: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Pretendard', 'Avenir Book';
+    font-size: 11px;
     transition: visibility 0s linear 0.25s, opacity 0.25s ease;
 }
 #updateAvailableTooltip::after {
     content: " ";
     position: absolute;
     left: 50%;
-    bottom: 100%;
+    top: 100%;
     margin-left: -5px;
     border-width: 5px;
     border-style: solid;
-    border-color: transparent transparent rgb(0, 0, 0) transparent;
+    border-color: rgba(20, 14, 8, 0.92) transparent transparent transparent;
 }
 #image_seal_container[update]:hover #updateAvailableTooltip {
     visibility: visible;
@@ -2946,99 +2871,87 @@ input:checked + .toggleSwitchSlider:before {
 }
 
 /* * *
-* Landing View (Bottom Styles) | Right Content
+* Landing View (Top Styles) | Profile Pill
 * * */
 
-/*  Wrapper container for top, right content. */
-#rightContainer {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    top: 50px;
-    align-items: flex-start;
-    height: calc(100% - 50px);
-}
-
-/* Right hand user content container. */
+/* Profile pill: a single glass chip holding username, avatar and settings. */
 #user_content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    position: relative;
-}
-
-/* User profile avatar container. */
-#avatarContainer {
-    border-radius: 50%;
-    border: 2px solid #cad7e1;
-    box-sizing: border-box;
-    background: rgba(1, 2, 1, 0.5);
-    height: 70px;
-    width: 70px;
-    box-shadow: 0px 0px 10px 0px rgb(0, 0, 0);
-    overflow: hidden;
-    position: relative;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-}
-
-/* Avatar edit overlay. */
-#avatarOverlay {
-    opacity: 0;
     position: absolute;
-    z-index: 1;
+    top: 14px;
+    right: 18px;
+    height: 44px;
     display: flex;
-    justify-content: center;
     align-items: center;
-    transition: 0.25s ease;
-    font-weight: bold;
-    letter-spacing: 2px;
-    background-color: rgba(0, 0, 0, 0.35);
-    -webkit-user-select: none;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-}
-#avatarOverlay:hover,
-#avatarOverlay:focus {
-    opacity: 1;
-}
-#avatarOverlay:active {
-    background-color: rgba(0, 0, 0, 0.45);
+    gap: 10px;
+    padding: 0px 7px 0px 16px;
+    box-sizing: border-box;
+    border-radius: 22px;
+    background: rgba(24, 17, 10, 0.50);
+    backdrop-filter: blur(14px) saturate(1.2);
+    border: 1px solid rgba(239, 228, 208, 0.14);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.30);
 }
 
 /* User profile name text. */
 #user_text {
-    font-size: 12px;
-    min-width: 135px;
-    font-weight: 900;
-    letter-spacing: 1px;
-    text-shadow: 0px 0px 20px black;
-    position: absolute;
-    right: 95px;
-    text-align: right;
+    font-family: 'Pretendard Medium', 'Avenir Medium';
+    font-size: 13px;
+    letter-spacing: 0.2px;
+    color: #F4EADA;
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     -webkit-user-select: initial;
 }
 
-/* Social media icon content container. */
-#mediaContent {
+/* User profile avatar chip (JS writes the background-image; CSS owns the
+   crop and fallback fill). */
+#avatarContainer {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 1.5px solid rgba(239, 228, 208, 0.35);
+    box-sizing: border-box;
+    overflow: hidden;
     position: relative;
-    display: flex;
-    flex-direction: column;
-    margin-top: 25px;
-    height: calc(100% - 95px);
-    width: 70px;
-    align-items: center;
+    background-color: rgba(8, 5, 2, 0.5);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-/* Social Media Icon division containers. */
-#internalMedia, #externalMedia {
-    display: flex;
-    flex-direction: column;
+/* Avatar edit overlay (label text hidden via font-size, kept for a11y). */
+#avatarOverlay {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    font-size: 0px;
+    cursor: pointer;
+    transition: 0.18s ease;
+    -webkit-user-select: none;
+}
+#avatarOverlay:hover,
+#avatarOverlay:focus {
+    background: rgba(0, 0, 0, 0.28);
+    box-shadow: inset 0 0 0 2px #FFD9A0;
+}
+#avatarOverlay:active {
+    background: rgba(0, 0, 0, 0.40);
+}
+
+/* Hairline divider between avatar and settings inside the pill. */
+.profileDivider {
+    width: 1px;
+    height: 18px;
+    background: rgba(239, 228, 208, 0.18);
+    flex-shrink: 0;
 }
 
 /* Container object which wraps an icon to ensure fluid transitions. */
@@ -3046,35 +2959,6 @@ input:checked + .toggleSwitchSlider:before {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 27px;
-}
-
-/* Divider bar between the external and internal icons. */
-.mediaDivider {
-    height: 1px;
-    width: 14px;
-    background: rgb(255, 255, 255);
-    margin: 10px 0px;
-}
-
-/* Social media icon shared styles. */
-.mediaSVG {
-    fill: #ffffff;
-    height: 12px;
-    transition: 0.25s ease;
-    cursor: pointer;
-    height: 12px;
-    width: 25px;
-}
-.mediaSVG:hover,
-.mediaURL:focus .mediaSVG,
-.mediaSVG:active {
-    height: 20px;
-}
-
-/* Social media URL shared styles. */
-.mediaURL {
-    outline: none;
 }
 
 /* Internal media button shared styles. */
@@ -3084,49 +2968,67 @@ input:checked + .toggleSwitchSlider:before {
     padding: 0px;
     display: flex;
     align-items: center;
+    justify-content: center;
     outline: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+.mediaButton:hover,
+.mediaButton:focus {
+    background: rgba(239, 228, 208, 0.10);
+}
+
+/* Shared icon styles (settings gear). */
+.mediaSVG {
+    fill: #EFE4D0;
+    transition: 0.2s ease;
+    cursor: pointer;
 }
 
 #settingsMediaContainer {
     position: relative;
 }
 
-/* Settings icon colors. */
+/* Settings icon. No size jump on hover — brighten with a soft glow instead. */
 #settingsSVG {
-    stroke: #ffffff;
     height: 15px;
 }
 .mediaButton:hover #settingsSVG,
-.mediaButton:focus #settingsSVG,
-.mediaButton:active #settingsSVG {
-    height: 23px;
+.mediaButton:focus #settingsSVG {
+    -webkit-filter: drop-shadow(0px 0px 3px rgba(255, 217, 160, 0.6));
 }
 
-/* Settings tooltip styles. */
+/* Settings tooltip — below the pill, hairline-bordered ink chip. */
 #settingsTooltip {
     visibility: hidden;
     opacity: 0;
-    width: 75px;
-    height: 20px;
-    background-color: rgba(0, 0, 0, 0.75);
+    white-space: nowrap;
+    background-color: rgba(20, 14, 8, 0.92);
+    border: 1px solid rgba(239, 228, 208, 0.18);
+    color: #F4EADA;
     text-align: center;
-    border-radius: 4px;
+    border-radius: 6px;
+    padding: 4px 10px;
     position: absolute;
     z-index: 1;
-    right: 130%;
-    font-size: 12px;
-    line-height: 20px;
+    top: calc(100% + 14px);
+    right: 0px;
+    font-family: 'Pretendard', 'Avenir Book';
+    font-size: 11px;
+    line-height: 1.4;
     transition: visibility 0s linear 0.25s, opacity 0.25s ease;
 }
 #settingsTooltip::after {
     content: " ";
     position: absolute;
-    top: 50%;
-    left: 100%;
-    margin-top: -5px;
+    bottom: 100%;
+    right: 11px;
     border-width: 5px;
     border-style: solid;
-    border-color: transparent transparent transparent rgba(0, 0, 0, 0.75);
+    border-color: transparent transparent rgba(20, 14, 8, 0.92) transparent;
 }
 .mediaButton:hover #settingsTooltip,
 .mediaButton:focus #settingsTooltip,
@@ -3136,250 +3038,101 @@ input:checked + .toggleSwitchSlider:before {
     transition-delay:0s;
 }
 
-/* X icon colors. */
-#xSVG:hover,
-#xURL:focus #xSVG {
-    fill: #000000;
-}
-#xSVG:active {
-    fill: #090909;
-}
-
-/* Instagram icon colors. */
-#instagramSVG:hover,
-#instagramURL:focus #instagramSVG {
-    fill: url('#instaFill')
-    /*fill: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); */
-}
-#instagramSVG:active {
-    fill: url('#instaFill')
-}
-
-/* Youtube icon colors. */
-#youtubeSVG:hover,
-#youtubeURL:focus #youtubeSVG {
-    fill: #f00;
-}
-#youtubeSVG:active {
-    fill: #ea0202;
-}
-
-/* Discord icon colors. */
-#discordSVG:hover,
-#discordURL:focus #discordSVG {
-    fill: #7288d9;
-}
-#discordSVG:active {
-    fill: #657ac4;
-}
-
 /*******************************************************************************
  *                                                                             *
  * Landing View (Bottom Styles)                                                *
  *                                                                             *
  ******************************************************************************/
 
-/* Style for a general label on the bottom of the landing view. */
+/* Style for a general label on the bottom of the landing view. The dock plate
+   guarantees contrast, so labels need no text-shadow. */
 .bot_label {
-    font-size: 9px;
-    letter-spacing: 1px;
     font-weight: bold;
-    text-shadow: 0px 0px 0px #bebcbb;
 }
 
-/* Divider used on the bottom of the landing view. */
+/* Divider inside the launch progress well. */
 .bot_divider {
-    height: 25px;
-    width: 2px;
-    background: rgba(107, 105, 105, 0.7);
-    margin-left: 20px;
-    margin-right: 20px;
+    width: 1px;
+    height: 28px;
+    background: rgba(239, 228, 208, 0.18);
+    margin: 0px 0px 0px 12px;
 }
 
 /* * *
-* Landing View (Bottom Styles) | Left Content
+* Landing View (Bottom Styles) | Dock & Left Content
 * * */
 
-/* Maintains maximum width on the status bar. */
+/* Decorative glass plate behind the whole dock. Lives INSIDE #lower > #left
+   so it rides the news slide (-200vh) together with the columns — a plate on
+   #lower itself would be left behind as an orphaned slab when news opens.
+   Geometry assumes #left is the first, flush-left column of #lower. */
+.dockPlate {
+    position: absolute;
+    left: 20px;
+    top: 0px;
+    bottom: 18px;
+    width: calc(100vw - 40px);
+    border-radius: 18px;
+    background: linear-gradient(165deg, rgba(47, 33, 19, 0.66) 0%, rgba(26, 18, 10, 0.78) 100%);
+    backdrop-filter: blur(18px) saturate(1.15);
+    border: 1px solid rgba(239, 228, 208, 0.13);
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 246, 229, 0.09);
+    pointer-events: none;
+}
+
+/* Server identity group: seal + name + status. */
+.serverIdentity {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.serverIdentityText {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-left: 16px;
+    max-width: 250px;
+}
+
+/* Server status line. The ::before dot reflects the [status] attribute set
+   by refreshServerStatus() in landing.js. */
 #server_status_wrapper {
     display: inline-flex;
-    width: 75px;
+    align-items: center;
+    gap: 7px;
+}
+#server_status_wrapper::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(244, 234, 218, 0.40);
+    flex-shrink: 0;
+}
+#server_status_wrapper[status='online']::before {
+    background: #9CCB72;
+    box-shadow: 0 0 8px rgba(156, 203, 114, 0.55);
+}
+#server_status_wrapper[status='offline']::before {
+    background: #D27A5A;
+    box-shadow: 0 0 8px rgba(210, 122, 90, 0.45);
+}
+
+/* Status label (e.g. 접속자 / 서버). */
+#landingPlayerLabel {
+    font-family: 'Pretendard', 'Avenir Book';
+    font-size: 11.5px;
+    letter-spacing: 0.4px;
+    color: rgba(244, 234, 218, 0.62);
 }
 
 /* Span which displays the player count of the selected server. */
 #player_count {
-    color: #949494;
-    font-size: 8px;
-    font-weight: 900;
-    text-shadow: 0px 0px 20px #949494;
-    margin-left: 10px;
-}
-
-/* Wrapper container for the mojang status bar. */
-#mojangStatusWrapper {
-    position: relative;
-    display: flex;
-    cursor: pointer;
-}
-
-/* Icon which displays the status of the mojang services. */
-#mojang_status_icon {
-    font-size: 30px;
-    color: #848484;
-    margin-left: 15px;
-    font-family: 'sans-serif';
-}
-
-/* Tooltip which displays more details about the mojang statuses. */
-#mojangStatusTooltip {
-    position: absolute;
-    visibility: hidden;
-    opacity: 0;
-    width: 145px;
-    min-height: 150px;
-    background-color: rgba(0, 0, 0, 0.75);
-    color: #fff;
-    border-radius: 4px;
-    padding: 5px 10px;
-    z-index: 1;
-    font-family: 'Avenir Medium';
-    font-size: 12px;
-    transition: visibility 0s linear 0.25s, opacity 0.25s ease;
-    bottom: calc(100% + 15px);
-    transform: translateX(-50%);
-    margin-left: 50%;
-    box-shadow: 0px 0px 20px rgb(0, 0, 0);
-    cursor: default;
-}
-#mojangStatusTooltip:after {
-    content: " ";
-    position: absolute;
-    left: 50%;
-    top: 100%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: rgba(0, 0, 0, 0.75) transparent transparent transparent;
-}
-#mojangStatusWrapper:hover #mojangStatusTooltip {
-    visibility: visible;
-    opacity: 1;
-    transition-delay: 0s;
-}
-
-/* Tooltip title for the mojang statuses. */
-#mojangStatusTooltipTitle {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 5px;
-    letter-spacing: 1px;
-}
-
-/* Wrapper container for the non essential services title. */
-#mojangStatusNEContainer {
-    display: flex;
-    align-items: center;
-    margin: 10px 0px;
-}
-
-/* White bar which surrounds the non essential service title. */
-.mojangStatusNEBar {
-    height: 1px;
-    width: 100%;
-    background: white;
-}
-
-/* Non essential service title text. */
-#mojangStatusNETitle {
-    font-size: 10px;
-    padding: 0px 3px;
-    text-align: center;
-    letter-spacing: 1px;
-}
-
-/* Wrapper container for mojang service information. */
-.mojangStatusContainer {
-    display: flex;
-}
-
-/* Displays the name of the mojang service. */
-.mojangStatusName {
-    width: 100%;
-    font-size: 10px;
-    letter-spacing: 1px;
-    line-height: 12px;
-    padding: 6px 0px;
-}
-
-/* Displays the status of the mojang service. */
-.mojangStatusIcon {
-    margin-right: 10px;
-    font-size: 18.5px;
-    color: #848484;
-}
-
-/* * *
-* Landing View (Bottom Styles) | Center Content
-* * */
-
-/* Button which opens the news view. */
-#newsButton {
-    background: none;
-    border: none;
-    cursor: pointer;
-    outline: none;
-}
-#newsButton:hover #newsButtonText,
-#newsButton:focus #newsButtonText {
-    text-shadow: 0px 0px 20px #fff, 0px 0px 20px #fff;
-}
-#newsButton:active {
-    color: #c7c7c7;
-    text-shadow: 0px 0px 20px #c7c7c7, 0px 0px 20px #c7c7c7;
-}
-
-#newsButton:hover #newsButtonSVG,
-#newsButton:focus #newsButtonSVG {
-    -webkit-filter: drop-shadow(0px 0px 2px #fff);
-}
-#newsButton:active #newsButtonSVG .arrowLine {
-    stroke: #c7c7c7;
-}
-#newsButton:active #newsButtonSVG {
-    -webkit-filter: drop-shadow(0px 0px 2px #c7c7c7);
-}
-#newsButton:disabled #newsButtonSVG .arrowLine {
-    stroke: rgba(255, 255, 255, 0.75);
-}
-
-/* Icon which indicates there is new news. */
-#newsButtonAlert {
-    width: 5px;
-    height: 5px;
-    position: absolute;
-    border-radius: 50%;
-    background: red;
-    right: -1px;
-    top: 50%;
-}
-
-/* Arrow image which floats above the news button. */
-#newsButtonSVG {
-    height: 11px;
-    margin-left: -2px;
-    transition: 0.25s ease;
-}
-
-/* Span which contains the news button text. */
-#newsButtonText {
-    color: white;
-    font-weight: 900;
-    letter-spacing: 2px;
-    text-shadow: 0px 0px 0px #bebcbb;
-    font-size: 11px;
-    line-height: 30px;
-    display: flex;
-    transition: 0.25s ease;
+    font-family: 'Avenir Medium', 'Pretendard Medium';
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #FFD9A0;
+    margin-left: 2px;
 }
 
 /* * *
@@ -3389,102 +3142,171 @@ input:checked + .toggleSwitchSlider:before {
 /* Main launch content container. */
 #landingContainer > #lower > #right #launch_content {
     position: relative;
-    top: 25px;
+    top: 0px;
     display: inline-flex;
+    align-items: center;
 }
 
-/* The launch button. */
+/* The hero PLAY button: filled cream-on-brown, the one unmistakable action. */
 #launch_button {
-    background: none;
-    border: none;
-    cursor: pointer;
+    min-width: 172px;
+    height: 54px;
+    padding: 0px 24px;
+    border-radius: 15px;
+    background: linear-gradient(180deg, #F6EDDD 0%, #E8DAC0 100%);
+    color: #432F1B;
+    font-family: 'Avenir Black', 'Avenir Heavy', 'Avenir Medium', 'Pretendard Medium';
     font-weight: 900;
-    letter-spacing: 2px;
-    text-shadow: 0px 0px 0px #bebcbb;
-    font-size: 20px;
-    padding: 0px;
-    transition: 0.25s ease;
+    font-size: 22px;
+    letter-spacing: 4px;
+    text-indent: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 8px 22px rgba(10, 6, 2, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.65), inset 0 -2px 0 rgba(71, 52, 30, 0.18);
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease, background 0.15s ease, color 0.15s ease;
     outline: none;
 }
 #launch_button:hover,
 #launch_button:focus {
-    text-shadow: 0px 0px 20px #fff, 0px 0px 20px #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 10px 26px rgba(10, 6, 2, 0.50), inset 0 1px 0 rgba(255, 255, 255, 0.65), inset 0 -2px 0 rgba(71, 52, 30, 0.18);
+    filter: brightness(1.03);
+}
+#launch_button:focus-visible {
+    outline: 2px solid #FFD9A0;
+    outline-offset: 3px;
 }
 #launch_button:active {
-    color: #c7c7c7;
-    text-shadow: 0px 0px 20px #c7c7c7, 0px 0px 20px #c7c7c7;
+    transform: translateY(1px);
+    background: #E0D0B2;
+    box-shadow: 0 4px 12px rgba(10, 6, 2, 0.40);
 }
 #launch_button:disabled {
-    color: #c7c7c7;
+    background: rgba(80, 62, 40, 0.45);
+    color: rgba(244, 234, 218, 0.40);
+    border-color: rgba(239, 228, 208, 0.10);
+    box-shadow: none;
+    transform: none;
     cursor: default;
     pointer-events: none;
 }
 
-/* Launch details main container, hidden until launch processing begins. */
+/* Launch details: a glass progress well with the same height and right edge
+   as PLAY, so the dock does not jump when JS swaps them. Hidden until launch
+   processing begins (JS writes display:flex). */
 #launch_details {
     position: relative;
-    top: 25px;
+    width: 280px;
+    height: 54px;
+    box-sizing: border-box;
+    border-radius: 15px;
+    background: rgba(44, 31, 17, 0.62);
+    border: 1px solid rgba(239, 228, 208, 0.22);
+    box-shadow: inset 0 1px 0 rgba(255, 246, 229, 0.08);
+    padding: 0px 20px;
+    align-items: center;
+    gap: 14px;
     display: none;
 }
- 
+
 /* Left side of launch details container, displays percentage and a divider. */
 #launch_details_left {
     display: flex;
+    align-items: center;
 }
 
 /* Span which displays percentage complete. */
 #launch_progress_label {
+    font-family: 'Avenir Heavy', 'Avenir Medium', 'Pretendard Medium';
     font-weight: 900;
-    letter-spacing: 1px;
-    text-shadow: 0px 0px 0px #bebcbb;
-    font-size: 20px;
-    min-width: 53.21px;
-    max-width: 53.21px;
+    font-size: 19px;
+    color: #F4EADA;
+    min-width: 52px;
+    max-width: 52px;
     text-align: right;
+    font-variant-numeric: tabular-nums;
 }
 
-/* Right side of launch details container, displays progress bar and details. */
+/* Right side of launch details container, displays progress bar and details.
+   Flexes to fill the well so the progress bar can never overflow to the right. */
+/* Fixed width so the well (width:fit-content) sizes around it — the progress
+   bar can never reach or overflow the well's right edge. */
 #launch_details_right {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    gap: 5px;
+    flex: 0 0 auto;
+    width: 160px;
 }
 
-/* Button which opens the server selection view. */
+/* Button which opens the server selection view — now the server title in the
+   dock identity block. Korean server names: keep letter-spacing minimal. */
 #server_selection_button {
     background: none;
     border: none;
     outline: none;
     cursor: pointer;
-    line-height: 24px;
     padding: 0px;
-    transition: 0.25s ease;
+    text-align: left;
+    font-family: 'Pretendard Medium', 'Avenir Medium';
+    font-size: 17px;
+    line-height: 20px;
+    letter-spacing: -0.2px;
+    color: #F7EEDD;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 240px;
+    transition: color 0.18s ease;
+}
+#server_selection_button::after {
+    content: '';
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    margin-left: 7px;
+    margin-bottom: 2px;
+    border-right: 1.5px solid rgba(239, 228, 208, 0.55);
+    border-bottom: 1.5px solid rgba(239, 228, 208, 0.55);
+    transform: rotate(45deg);
 }
 #server_selection_button:hover,
 #server_selection_button:focus {
-    text-shadow: 0px 0px 20px #fff, 0px 0px 20px #fff, 0px 0px 20px #fff;
+    color: #FFD9A0;
+    text-decoration: underline 1.5px rgba(255, 217, 160, 0.7);
+    text-underline-offset: 4px;
 }
 #server_selection_button:active {
-    color: #c7c7c7;
-    text-shadow: 0px 0px 20px #c7c7c7, 0px 0px 20px #c7c7c7, 0px 0px 20px #c7c7c7;
+    color: #E0C795;
 }
 
 /* Progress bar styles. */
 #launch_progress[value] {
-    height: 3px;
-    width: 265px;
+    display: block;
+    height: 5px;
+    width: 160px;
+    min-width: 0;
     -webkit-appearance: none;
+    border-radius: 10px;
 }
 #launch_progress[value]::-webkit-progress-bar {
-    background-color: transparent;
+    background-color: rgba(239, 228, 208, 0.16);
+    border-radius: 10px;
 }
 #launch_progress[value]::-webkit-progress-value {
-    background-color: #fff;
+    background: linear-gradient(90deg, #E9DCC3, #FFD9A0);
+    border-radius: 10px;
 }
 
 /* Span which displays information about the status of the launch process. */
 #launch_details_text {
+    font-family: 'Pretendard', 'Avenir Book';
     font-size: 11px;
+    font-weight: normal;
+    letter-spacing: 0.3px;
+    color: rgba(244, 234, 218, 0.72);
+    max-width: 160px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -3500,7 +3322,7 @@ input:checked + .toggleSwitchSlider:before {
 * Overlay View (Main Content)
 * * */
 
-/* Overlay container, placed over the main div. */
+/* Overlay container, placed over the main div. Warm dim over the backdrop. */
 #overlayContainer {
     position: absolute;
     z-index: 500;
@@ -3510,38 +3332,37 @@ input:checked + .toggleSwitchSlider:before {
     justify-content: center;
     width: 100%;
     height: calc(100% - 22px);
-    background: rgba(0, 0, 0, 0.50);
+    background: rgba(10, 6, 2, 0.55);
 }
 
-/* Main overlay content. */
+/* Generic dialog card — espresso glass, matching the dock. */
 #overlayContent {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    /*justify-content: space-between;*/
-    width: 300px;
-    /*height: 35%;*/
+    width: 400px;
     box-sizing: border-box;
-    padding: 15px 0px;
-    /* background-color: #424242; */
+    padding: 28px 28px 24px;
+    border-radius: 18px;
+    background: linear-gradient(165deg, rgba(47, 33, 19, 0.66) 0%, rgba(26, 18, 10, 0.78) 100%);
+    backdrop-filter: blur(18px) saturate(1.15);
+    border: 1px solid rgba(239, 228, 208, 0.13);
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 246, 229, 0.09);
     text-align: center;
 }
 
 /* Main overlay content anchor styles. */
-#overlayContent a,
-#overlayDismiss {
-    color: rgba(202, 202, 202, 0.75);
-    transition: 0.25s ease;
+#overlayContent a {
+    color: rgba(255, 217, 160, 0.85);
+    transition: 0.2s ease;
 }
 #overlayContent a:hover,
-#overlayContent a:focus,
-#overlayDismiss:focus {
-    color: rgba(255, 255, 255, 0.75);
+#overlayContent a:focus {
+    color: #FFD9A0;
 }
-#overlayContent a:active,
-#overlayDismiss:active {
-    color: rgba(165, 165, 165, 0.75);
+#overlayContent a:active {
+    color: rgba(224, 199, 149, 0.85);
 }
 
 /* Add spacing between overlay content elements. */
@@ -3552,204 +3373,269 @@ input:checked + .toggleSwitchSlider:before {
     margin-bottom: 0px !important;
 }
 #overlayContent > * {
-    margin: 8px 0px;
+    margin: 10px 0px;
 }
 
 /* Overlay title styles. */
 #overlayTitle {
-    font-family: 'Avenir Medium';
+    font-family: 'Pretendard Medium', 'Avenir Medium';
     font-size: 20px;
-    font-weight: bold;
-    letter-spacing: 1px;
+    font-weight: 600;
+    line-height: 1.45;
+    letter-spacing: -0.2px;
+    color: #F7EEDD;
     -webkit-user-select: initial;
 }
 
 /* Overlay description styles. */
 #overlayDesc {
-    font-size: 12px;
-    font-weight: bold;
+    font-family: 'Pretendard', 'Avenir Book';
+    font-size: 13px;
+    line-height: 1.55;
+    color: rgba(244, 234, 218, 0.72);
     -webkit-user-select: initial;
 }
 
 /* Div which contains action buttons. */
 #overlayActionContainer {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
+    align-items: center;
+    gap: 14px;
 }
 
-/* Overlay acknowledge button styles. */
-#overlayAcknowledge {
-    background: none;
-    border: 1px solid #ffffff;
-    color: white;
-    font-family: 'Avenir Medium';
-    font-weight: bold;
-    border-radius: 2px;
-    padding: 0px 8.1px;
+/* * *
+* Overlay View (Shared Dialog Buttons)
+* * */
+
+/* Primary dialog button — cream "PLAY" style. */
+#overlayAcknowledge,
+#serverSelectConfirm,
+#accountSelectConfirm {
+    height: 48px;
+    min-width: 130px;
+    padding: 0px 26px;
+    border-radius: 15px;
+    background: linear-gradient(180deg, #F6EDDD 0%, #E8DAC0 100%);
+    color: #432F1B;
+    font-family: 'Avenir Heavy', 'Avenir Medium', 'Pretendard Medium';
+    font-weight: 900;
+    font-size: 16px;
+    letter-spacing: 1px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 8px 22px rgba(10, 6, 2, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.65), inset 0 -2px 0 rgba(71, 52, 30, 0.18);
     cursor: pointer;
-    transition: 0.25s ease;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease, background 0.15s ease;
 }
-#overlayAcknowledge:hover,
-#overlayAcknowledge:focus {
-    box-shadow: 0px 0px 10px 0px #fff;
+#overlayAcknowledge:hover, #overlayAcknowledge:focus,
+#serverSelectConfirm:hover, #serverSelectConfirm:focus,
+#accountSelectConfirm:hover, #accountSelectConfirm:focus {
+    transform: translateY(-1px);
+    filter: brightness(1.03);
+    box-shadow: 0 10px 26px rgba(10, 6, 2, 0.50), inset 0 1px 0 rgba(255, 255, 255, 0.65), inset 0 -2px 0 rgba(71, 52, 30, 0.18);
     outline: none;
 }
-#overlayAcknowledge:active {
-    border-color: rgba(255, 255, 255, 0.75);
-    color: rgba(255, 255, 255, 0.75);
+#overlayAcknowledge:focus-visible,
+#serverSelectConfirm:focus-visible,
+#accountSelectConfirm:focus-visible {
+    outline: 2px solid #FFD9A0;
+    outline-offset: 3px;
+}
+#overlayAcknowledge:active,
+#serverSelectConfirm:active,
+#accountSelectConfirm:active {
+    transform: translateY(1px);
+    background: #E0D0B2;
+    box-shadow: 0 4px 12px rgba(10, 6, 2, 0.40);
 }
 
-/* Overlay dismiss option styles. */
-#overlayDismiss {
-    font-weight: bold;
-    font-size: 10px;
+/* Ghost / cancel dialog button. */
+#overlayDismiss,
+#serverSelectCancel,
+#accountSelectCancel {
+    height: 48px;
+    min-width: 110px;
+    padding: 0px 22px;
+    border-radius: 15px;
+    background: rgba(239, 228, 208, 0.08);
+    border: 1px solid rgba(239, 228, 208, 0.18);
+    color: #F4EADA;
+    font-family: 'Pretendard Medium', 'Avenir Medium';
+    font-size: 14px;
     text-decoration: none;
-    padding-top: 2.5px;
-    background: none;
-    border: none;
-    outline: none;
     cursor: pointer;
+    transition: 0.18s ease;
 }
-#overlayDismiss:hover {
-    color: rgba(255, 255, 255, 0.75);
+#overlayDismiss:hover, #overlayDismiss:focus,
+#serverSelectCancel:hover, #serverSelectCancel:focus,
+#accountSelectCancel:hover, #accountSelectCancel:focus {
+    background: rgba(239, 228, 208, 0.12);
+    border-color: rgba(239, 228, 208, 0.28);
+    color: #FFD9A0;
+    outline: none;
 }
-#overlayDismiss:active {
-    color: rgba(165, 165, 165, 0.75);
+#overlayDismiss:focus-visible,
+#serverSelectCancel:focus-visible,
+#accountSelectCancel:focus-visible {
+    outline: 2px solid #FFD9A0;
+    outline-offset: 3px;
+}
+#overlayDismiss:active,
+#serverSelectCancel:active,
+#accountSelectCancel:active {
+    background: rgba(239, 228, 208, 0.16);
+}
+
+/* Cancel button wrappers — keep them as flex items so the action-row gap holds. */
+#overlayDismissWrapper,
+#serverSelectCancelWrapper,
+#accountSelectCancelWrapper {
+    display: flex;
 }
 
 /* * *
 * Overlay View (Server + Account Selection Content)
 * * */
 
-/* Server selection content container. */
+/* Selection card — espresso glass. */
 #serverSelectContent,
 #accountSelectContent {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 75%;
+    box-sizing: border-box;
+    width: 440px;
+    max-height: 78vh;
+    padding: 28px 28px 24px;
+    border-radius: 18px;
+    background: linear-gradient(165deg, rgba(47, 33, 19, 0.66) 0%, rgba(26, 18, 10, 0.78) 100%);
+    backdrop-filter: blur(18px) saturate(1.15);
+    border: 1px solid rgba(239, 228, 208, 0.13);
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 246, 229, 0.09);
+}
+#accountSelectContent {
+    width: 360px;
 }
 
-/* Server selection header. */
+/* Selection header. */
 #serverSelectHeader,
 #accountSelectHeader {
-    font-family: 'Avenir Medium';
-    font-size: 20px;
-    font-weight: bold;
-    color: #fff;
-    margin-bottom: 25px;
+    font-family: 'Pretendard Medium', 'Avenir Medium';
+    font-size: 19px;
+    line-height: 24px;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+    color: #F7EEDD;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid rgba(239, 228, 208, 0.13);
 }
 
-/* Wrapper div for the list of available servers. */
+/* Wrapper div for the list — flexes to fill, lets the scrollable child shrink. */
 #serverSelectList,
 #accountSelectList {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    max-height: 65%;
-    min-height: 40%;
+    flex: 1 1 auto;
+    min-height: 0;
 }
 
-/* Scrollable div which lists the available servers. */
+/* Scrollable list. */
 #serverSelectListScrollable,
 #accountSelectListScrollable {
-    padding: 0px 5px;
-    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 2px 8px 2px 2px;
+    overflow-y: auto;
 }
 #serverSelectListScrollable::-webkit-scrollbar,
 #accountSelectListScrollable::-webkit-scrollbar {
-    width: 2px;
+    width: 6px;
 }
 #serverSelectListScrollable::-webkit-scrollbar-track,
 #accountSelectListScrollable::-webkit-scrollbar-track {
-    display: none;
+    background: transparent;
 }
 #serverSelectListScrollable::-webkit-scrollbar-thumb,
 #accountSelectListScrollable::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.50);
+    background: rgba(239, 228, 208, 0.18);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+#serverSelectListScrollable::-webkit-scrollbar-thumb:hover,
+#accountSelectListScrollable::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 217, 160, 0.45);
+    background-clip: padding-box;
 }
 
-/* Content container for a server listing. */
+/* Server listing row — selectable glass chip. */
 .serverListing {
-    border: none;
-    padding: 0px;
-    width: 375px;
-    min-height: 60px;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 72px;
+    padding: 12px 14px;
     display: flex;
-    justify-content: flex-start;
     align-items: center;
-    opacity: 0.6;
-    transition: 0.25s ease;
+    gap: 14px;
+    border-radius: 13px;
+    background: rgba(24, 17, 10, 0.50);
+    border: 1px solid rgba(239, 228, 208, 0.14);
     cursor: pointer;
     position: relative;
-    background: rgba(131, 131, 131, 0.25);
-}
-.serverListing[selected] {
-    cursor: default;
-    opacity: 1.0;
+    text-align: left;
+    transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
 }
 .serverListing:hover,
 .serverListing:focus {
     outline: none;
-    opacity: 1.0;
+    background: rgba(239, 228, 208, 0.10);
+    border-color: rgba(239, 228, 208, 0.22);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(10, 6, 2, 0.30);
 }
-
-.accountListing {
-    color: white;
-    border: 1px solid rgba(126, 126, 126, 0.57);
-    border-radius: 3px;
-    padding: 5px 45px;
-    width: 250px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    opacity: 0.6;
-    transition: 0.25s ease;
-    cursor: pointer;
-    position: relative;
-    background: rgba(0, 0, 0, 0.25);
+.serverListing:focus-visible {
+    outline: 2px solid #FFD9A0;
+    outline-offset: 2px;
 }
-.accountListing[selected] {
+.serverListing[selected] {
     cursor: default;
-    opacity: 1.0;
+    padding-right: 46px;
+    border: 1px solid #FFD9A0;
+    background: linear-gradient(165deg, rgba(70, 50, 28, 0.62), rgba(40, 28, 15, 0.74));
+    box-shadow: 0 0 0 1px rgba(255, 217, 160, 0.35), 0 8px 22px rgba(10, 6, 2, 0.40);
+    transform: none;
 }
-.accountListing:hover,
-.accountListing:focus {
-    outline: none;
-    opacity: 1.0;
-}
-
-.accountListingName {
-    display: flex;
-    height: 100%;
-    width: 100%;
-    padding-left: 10px;
-}
-
-/* Add spacing between server listings. */
-#serverSelectListScrollable > .serverListing:not(:first-child):not(:last-child),
-#accountSelectListScrollable > .accountListing:not(:first-child):not(:last-child) {
-    margin: 5px 0px;
-}
-#serverSelectListScrollable > .serverListing:first-child,
-#accountSelectListScrollable > .accountListing:first-child {
-    margin-bottom: 5px;
-}
-#serverSelectListScrollable > .serverListing:last-child,
-#accountSelectListScrollable > .accountListing:last-child {
-    margin-top: 5px;
+.serverListing[selected]::after {
+    content: '\2713';
+    position: absolute;
+    top: 50%;
+    right: 14px;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1.5px solid #FFD9A0;
+    background: rgba(255, 217, 160, 0.18);
+    color: #FFD9A0;
+    font-size: 12px;
+    line-height: 20px;
+    text-align: center;
 }
 
 /* Server listing image. */
 .serverListingImg {
-    margin: 0px 10px 0px 5px;
-    border: 1px solid #fff;
-    height: 50px;
-    width: 50px;
+    flex-shrink: 0;
+    margin: 0px;
+    height: 48px;
+    width: 48px;
+    border-radius: 10px;
+    border: 1px solid rgba(239, 228, 208, 0.18);
+    object-fit: cover;
+}
+.serverListing[selected] .serverListingImg {
+    border-color: rgba(255, 217, 160, 0.45);
 }
 
 /* Content container for the server listing's details. */
@@ -3757,51 +3643,68 @@ input:checked + .toggleSwitchSlider:before {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: space-between;
-    height: 50px;
+    justify-content: center;
+    gap: 4px;
+    min-width: 0;
+    flex: 1 1 auto;
 }
 
 /* The name of the server listing. */
 .serverListingName {
-    font-size: 14px;
-    font-weight: bold;
+    font-family: 'Pretendard Medium', 'Avenir Medium';
+    font-size: 17px;
+    line-height: 20px;
+    color: #F4EADA;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* Description for the server listing. */
 .serverListingDescription {
-    font-size: 10px;
-    line-height: 10px;
-    font-weight: bold;
+    font-family: 'Pretendard', 'Avenir Book';
+    font-size: 12px;
+    line-height: 15px;
+    font-weight: normal;
+    color: rgba(244, 234, 218, 0.62);
     text-align: left;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 /* Content container for the server listing's information. */
 .serverListingInfo {
     width: 100%;
     display: flex;
-    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    margin-top: 2px;
 }
 
 /* The minecraft version of the server listing. */
 .serverListingVersion {
-    font-size: 10px;
-    text-align: center;
+    font-size: 10.5px;
     display: flex;
-    justify-content: center;
     align-items: center;
-    line-height: 12px;
-    height: 12px;
-    border-radius: 2px;
-    background: rgba(31, 140, 11, 0.8);
-    padding: 0px 2px;
+    line-height: 1;
+    border-radius: 7px;
+    background: rgba(156, 203, 114, 0.16);
+    border: 1px solid rgba(156, 203, 114, 0.40);
+    color: #9CCB72;
+    padding: 3px 8px;
 }
 
 /* The revision version of the server's manifest. */
 .serverListingRevision {
-    color: #969696;
-    font-size: 10px;
-    line-height: 12px;
-    padding: 0px 5px;
+    color: rgba(244, 234, 218, 0.45);
+    font-size: 10.5px;
+    line-height: 1;
+    padding: 0px;
 }
 
 /* Star which indicates the default (main) server. */
@@ -3809,20 +3712,34 @@ input:checked + .toggleSwitchSlider:before {
     display: flex;
     align-items: center;
     cursor: pointer;
-    height: 12px;
     position: relative;
+    margin-left: 2px;
+}
+.serverListingStarWrapper svg {
+    width: 16px;
+    height: 16px;
+    -webkit-filter: drop-shadow(0px 0px 4px rgba(255, 217, 160, 0.5));
+}
+.serverListingStarWrapper svg .cls-1 {
+    fill: #FFD9A0;
+}
+.serverListingStarWrapper svg .cls-2 {
+    stroke: #FFD9A0;
 }
 /* Tooltip which displays when hovering over the star. */
 .serverListingStarTooltip {
     visibility: hidden;
     opacity: 0;
-    width: 65px;
-    background-color: rgba(0, 0, 0, 0.40);
+    white-space: nowrap;
+    background-color: rgba(20, 14, 8, 0.92);
+    border: 1px solid rgba(239, 228, 208, 0.18);
+    color: #F4EADA;
     text-align: center;
-    border-radius: 4px;
+    border-radius: 6px;
+    padding: 3px 8px;
     position: absolute;
     z-index: 1;
-    left: 130%;
+    left: 150%;
     font-size: 10px;
     transition: visibility 0s linear 0.25s, opacity 0.25s ease;
 }
@@ -3830,11 +3747,11 @@ input:checked + .toggleSwitchSlider:before {
     content: " ";
     position: absolute;
     top: 50%;
-    right: 100%; /* To the left of the tooltip */
+    right: 100%;
     margin-top: -5px;
     border-width: 5px;
     border-style: solid;
-    border-color: transparent rgba(0, 0, 0, 0.40) transparent transparent;
+    border-color: transparent rgba(20, 14, 8, 0.92) transparent transparent;
 }
 .serverListingStarWrapper:hover .serverListingStarTooltip {
     visibility: visible;
@@ -3842,66 +3759,87 @@ input:checked + .toggleSwitchSlider:before {
     transition-delay:0s;
 }
 
-/* Content container which contains the server select actions. */
+/* Account listing row — glass chip (matches server rows). */
+.accountListing {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 56px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-radius: 13px;
+    background: rgba(24, 17, 10, 0.50);
+    border: 1px solid rgba(239, 228, 208, 0.14);
+    color: #F4EADA;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+.accountListing img {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+.accountListing:hover,
+.accountListing:focus {
+    outline: none;
+    background: rgba(239, 228, 208, 0.10);
+    border-color: rgba(239, 228, 208, 0.22);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(10, 6, 2, 0.30);
+}
+.accountListing:focus-visible {
+    outline: 2px solid #FFD9A0;
+    outline-offset: 2px;
+}
+.accountListing[selected] {
+    cursor: default;
+    padding-right: 46px;
+    border: 1px solid #FFD9A0;
+    background: linear-gradient(165deg, rgba(70, 50, 28, 0.62), rgba(40, 28, 15, 0.74));
+    box-shadow: 0 0 0 1px rgba(255, 217, 160, 0.35), 0 8px 22px rgba(10, 6, 2, 0.40);
+    transform: none;
+}
+.accountListing[selected]::after {
+    content: '\2713';
+    position: absolute;
+    top: 50%;
+    right: 14px;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1.5px solid #FFD9A0;
+    background: rgba(255, 217, 160, 0.18);
+    color: #FFD9A0;
+    font-size: 12px;
+    line-height: 20px;
+    text-align: center;
+}
+
+.accountListingName {
+    display: flex;
+    align-items: center;
+    font-family: 'Pretendard Medium', 'Avenir Medium';
+    font-size: 15px;
+    color: #F4EADA;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Content container which contains the selection actions. */
 #serverSelectActions,
 #accountSelectActions {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-top: 25px;
-}
-
-/* Server selection confirm button styles. */
-#serverSelectConfirm,
-#accountSelectConfirm {
-    background: none;
-    border: 1px solid #ffffff;
-    color: white;
-    font-family: 'Avenir Medium';
-    font-weight: bold;
-    border-radius: 2px;
-    padding: 0px 8.1px;
-    cursor: pointer;
-    transition: 0.25s ease;
-    min-height: 20.67px;
-}
-#serverSelectConfirm:hover,
-#serverSelectConfirm:focus,
-#accountSelectConfirm:hover,
-#accountSelectConfirm:focus {
-    box-shadow: 0px 0px 10px 0px #fff;
-    outline: none;
-}
-#serverSelectConfirm:active,
-#accountSelectConfirm:active {
-    border-color: rgba(255, 255, 255, 0.75);
-    color: rgba(255, 255, 255, 0.75);
-}
-
-/* Server selection cancel button styles. */
-#serverSelectCancel,
-#accountSelectCancel {
-    font-weight: bold;
-    font-size: 10px;
-    text-decoration: none;
-    padding-top: 2.5px;
-    color: rgba(202, 202, 202, 0.75);
-    transition: 0.25s ease;
-    background: none;
-    border: none;
-    outline: none;
-    cursor: pointer;
-}
-#serverSelectCancel:hover,
-#serverSelectCancel:focus,
-#accountSelectCancel:hover,
-#accountSelectCancel:focus {
-    color: rgba(255, 255, 255, 0.75);
-}
-#serverSelectCancel:active,
-#accountSelectCancel:active {
-    color: rgba(165, 165, 165, 0.75);
+    gap: 14px;
+    margin-top: 22px;
 }
 
 /*******************************************************************************
@@ -3938,17 +3876,22 @@ input:checked + .toggleSwitchSlider:before {
     justify-content: center;
 }
 
-/* Stationary image for the spinner. */
+/* Stationary logo in the center, smaller than the text ring so the rotating
+   text orbits cleanly outside it instead of overlapping. */
 #loadCenterImage {
     position: absolute;
-    width: 277px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 180px;
     height: auto;
 }
 
-/* Rotating image for the spinner. */
+/* Rotating circular text ("MARU LAUNCHER") around the center logo.
+   Inline SVG so it can use the launcher's @font-face fonts (Avenir). */
 #loadSpinnerImage {
     width: 280px;
-    height: auto;
+    height: 280px;
     z-index: 400;
 }
 

@@ -166,13 +166,6 @@ document.addEventListener('readystatechange', function () {
             })
         })
 
-        // Remove focus from social media buttons once they're clicked.
-        Array.from(document.getElementsByClassName('mediaURL')).map(val => {
-            val.addEventListener('click', e => {
-                document.activeElement.blur()
-            })
-        })
-
     } else if(document.readyState === 'complete'){
 
         //266.01
@@ -183,11 +176,10 @@ document.addEventListener('readystatechange', function () {
         //const targetWidth2 = document.getElementById("server_selection").getBoundingClientRect().width
         //const targetWidth3 = document.getElementById("launch_button").getBoundingClientRect().width
 
-        document.getElementById('launch_details').style.maxWidth = 266.01
-        document.getElementById('launch_progress').style.width = 170.8
-        document.getElementById('launch_details_right').style.maxWidth = 170.8
-        document.getElementById('launch_progress_label').style.width = 53.21
-        
+        // (Removed legacy inline width writes on launch_details/launch_progress/
+        // launch_details_right/launch_progress_label — they overrode the
+        // stylesheet and broke the redesigned progress well layout.)
+
     }
 
 }, false)

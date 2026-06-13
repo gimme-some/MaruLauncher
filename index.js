@@ -148,8 +148,8 @@ ipcMain.on(MSFT_OPCODE.OPEN_LOGIN, (ipcEvent, ...arguments_) => {
             let queryMap = {}
             
             new URL(uri).searchParams.forEach((v, k) => {
-                queryMap[k] = v;
-            });
+                queryMap[k] = v
+            })
 
             ipcEvent.reply(MSFT_OPCODE.REPLY_LOGIN, MSFT_REPLY_TYPE.SUCCESS, queryMap, msftAuthViewSuccess)
 
@@ -227,6 +227,8 @@ function createWindow() {
     win = new BrowserWindow({
         width: 980,
         height: 552,
+        minWidth: 980,
+        minHeight: 552,
         icon: getPlatformIcon('SealCircle'),
         frame: false,
         webPreferences: {
@@ -327,7 +329,7 @@ function getPlatformIcon(filename){
     let ext
     switch(process.platform) {
         case 'win32':
-            ext = 'ico'
+            ext = 'png'
             break
         case 'darwin':
         case 'linux':

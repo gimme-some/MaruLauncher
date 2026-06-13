@@ -35,8 +35,9 @@ exports.queryEJS = function(id, placeHolders){
 exports.setupLanguage = function(){
     // Load Language Files
     exports.loadLanguage('en_US')
-    // Uncomment this when translations are ready
-    //exports.loadLanguage('xx_XX')
+    // Korean translation. Loaded after en_US so it overrides the English values,
+    // while any key missing from ko_KR safely falls back to the English text.
+    exports.loadLanguage('ko_KR')
 
     // Load Custom Language File for Launcher Customizer
     exports.loadLanguage('_custom')

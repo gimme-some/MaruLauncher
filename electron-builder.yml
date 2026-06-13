@@ -1,8 +1,19 @@
-appId: 'helioslauncher'
-productName: 'Helios Launcher'
-artifactName: '${productName}-setup-${version}.${ext}'
+appId: 'com.maru.launcher'
+productName: 'Maru Launcher'
+# Hyphenated (no space) so the built filename matches the latest.yml URL and the
+# GitHub release asset name — otherwise auto-update can't find the download.
+artifactName: 'Maru-Launcher-setup-${version}.${ext}'
 
-copyright: 'Copyright © 2018-2026 Daniel Scalzi'
+copyright: 'Copyright © 2026 Minseong Kim'
+
+# Launcher self-update feed: checks releases on the owner's own GitHub repo
+# (NOT the upstream Helios repo). electron-updater reads the app-update.yml
+# this generates. Build locally with `npm run dist:win` (no token needed);
+# upload the dist artifacts to a GitHub Release to push an update.
+publish:
+  provider: github
+  owner: gimme-some
+  repo: MaruLauncher
 
 asar: true
 compression: 'maximum'
@@ -33,16 +44,16 @@ mac:
       arch:
         - 'x64'
         - 'arm64'
-  artifactName: '${productName}-setup-${version}-${arch}.${ext}'
+  artifactName: 'Maru-Launcher-setup-${version}-${arch}.${ext}'
   category: 'public.app-category.games'
 
 # Linux Configuration
 linux: 
   target: 'AppImage'
-  maintainer: 'Daniel Scalzi'
-  vendor: 'Daniel Scalzi'
-  synopsis: 'Modded Minecraft Launcher'
-  description: 'Custom launcher which allows users to join modded servers. All mods, configurations, and updates are handled automatically.'
+  maintainer: 'Minseong Kim'
+  vendor: 'Minseong Kim'
+  synopsis: "Maru's Summer Valley launcher"
+  description: 'Custom Minecraft launcher for Maru''s Summer Valley. Mods, configs, and updates are handled automatically.'
   category: 'Game'
 
 

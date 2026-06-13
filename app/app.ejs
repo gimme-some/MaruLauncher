@@ -41,7 +41,14 @@
         <div id="loadingContent">
             <div id="loadSpinnerContainer">
                 <img id="loadCenterImage" src="assets/images/LoadingSeal.png">
-                <img id="loadSpinnerImage" class="rotating" src="assets/images/LoadingText.png">
+                <svg id="loadSpinnerImage" class="rotating" viewBox="0 0 1000 1000">
+                    <defs>
+                        <path id="loadSpinnerTextPath" d="M 500,70 a 430,430 0 1 1 0,860 a 430,430 0 1 1 0,-860"/>
+                    </defs>
+                    <text fill="#ffffff" font-family="'Avenir Medium', 'Pretendard Medium', sans-serif" font-size="58">
+                        <textPath href="#loadSpinnerTextPath" textLength="2701" lengthAdjust="spacing">MARU LAUNCHER  •  MARU LAUNCHER  •  MARU LAUNCHER  •  MARU LAUNCHER  •  MARU LAUNCHER  •  </textPath>
+                    </text>
+                </svg>
             </div>
         </div>
     </div>
