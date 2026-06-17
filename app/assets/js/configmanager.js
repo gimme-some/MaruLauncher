@@ -64,8 +64,13 @@ function resolveSelectedRAM(ram) {
         return `${ram.recommended}M`
     } else {
         // Legacy behavior
+        // Default heap scales to system memory so Minecraft launches comfortably
+        // without starving the OS on smaller machines.
         const mem = os.totalmem()
-        return mem >= (8*1073741824) ? '4G' : (mem >= (6*1073741824) ? '3G' : '2G')
+        return mem >= (30*1073741824) ? '12G'
+            : (mem >= (12*1073741824) ? '8G'
+                : (mem >= (10*1073741824) ? '6G'
+                    : (mem >= (6*1073741824) ? '4G' : '2G')))
     }
 }
 
