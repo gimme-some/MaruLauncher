@@ -341,8 +341,24 @@ function getPlatformIcon(filename){
     return path.join(__dirname, 'app', 'assets', 'images', `${filename}.${ext}`)
 }
 
-app.on('ready', createWindow)
-app.on('ready', createMenu)
+// Enforce a single running instance. If the launcher is already open and it is
+// started again (e.g. double-clicking the desktop icon), don't open a second
+// window — focus the existing one instead.
+if (!app.requestSingleInstanceLock()) {
+    app.quit()
+} else {
+    app.on('second-instance', () => {
+        if (win) {
+            if (win.isMinimized()) {
+                win.restore()
+            }
+            win.focus()
+        }
+    })
+
+    app.on('ready', createWindow)
+    app.on('ready', createMenu)
+}
 
 app.on('window-all-closed', () => {
     // On macOS it is common for applications and their menu bar

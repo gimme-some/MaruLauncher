@@ -319,8 +319,14 @@ const refreshServerStatus = async (fade = false) => {
 
 // Server Status is refreshed in uibinder.js on distributionIndexDone.
 
-// Set refresh rate to once every 5 minutes.
-let serverStatusListener = setInterval(() => refreshServerStatus(true), 300000)
+// Refresh the server status periodically. A Minecraft ping is a single short
+// TCP exchange (a few KB), so a 1-minute cadence is negligible for CPU/traffic.
+// Skip while the window is hidden/minimized so we don't ping when no one's looking.
+let serverStatusListener = setInterval(() => {
+    if(!document.hidden){
+        refreshServerStatus()
+    }
+}, 60000)
 
 /**
  * Shows an error overlay, toggles off the launch area.

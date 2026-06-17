@@ -80,11 +80,27 @@ function resolveSelectedRAM(ram) {
  * Dynamic = Calculated by a private function.
  * Resolved = Resolved externally, defaults to null.
  */
+// Pick a sensible default game resolution from the primary monitor: 1920x1080
+// for monitors larger than 1920x1080, otherwise 1600x900. Falls back to
+// 1280x720 if the monitor size can't be determined.
+function resolveDefaultResolution() {
+    try {
+        const { screen } = require('@electron/remote')
+        const d = screen.getPrimaryDisplay()
+        const w = Math.round(d.size.width * d.scaleFactor)
+        const h = Math.round(d.size.height * d.scaleFactor)
+        return (w > 1920 || h > 1080) ? { width: 1920, height: 1080 } : { width: 1600, height: 900 }
+    } catch (err) {
+        return { width: 1280, height: 720 }
+    }
+}
+const DEFAULT_RESOLUTION = resolveDefaultResolution()
+
 const DEFAULT_CONFIG = {
     settings: {
         game: {
-            resWidth: 1280,
-            resHeight: 720,
+            resWidth: DEFAULT_RESOLUTION.width,
+            resHeight: DEFAULT_RESOLUTION.height,
             fullscreen: false,
             autoConnect: true,
             launchDetached: true
