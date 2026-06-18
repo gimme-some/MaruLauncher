@@ -499,45 +499,6 @@ const GAME_JOINED_REGEX = /\[.+\]: Sound engine started/
 const GAME_LAUNCH_REGEX = /^\[.+\]: (?:MinecraftForge .+ Initialized|ModLauncher .+ starting: .+|Loading Minecraft .+ with Fabric Loader .+)$/
 const MIN_LINGER = 5000
 
-/**
- * Seed bundled default configs (keybinds via options.txt, JourneyMap design,
- * etc.) into the selected server's instance — but only for files that don't
- * already exist. New players get the curated defaults on first launch, while
- * anyone's later changes are preserved (these files are NOT part of the
- * distribution, so they are never re-validated or overwritten on launch).
- */
-function seedDefaultConfigs(serv){
-    const fs = require('fs')
-    const path = require('path')
-    const remote = require('@electron/remote')
-    try {
-        const defaultsRoot = path.join(remote.app.getAppPath(), 'app', 'defaultconfig')
-        if(!fs.existsSync(defaultsRoot)){
-            return
-        }
-        const instanceRoot = path.join(ConfigManager.getInstanceDirectory(), serv.rawServer.id)
-        const walk = (dir) => {
-            for(const entry of fs.readdirSync(dir, { withFileTypes: true })){
-                const abs = path.join(dir, entry.name)
-                if(entry.isDirectory()){
-                    walk(abs)
-                } else {
-                    const rel = path.relative(defaultsRoot, abs)
-                    const target = path.join(instanceRoot, rel)
-                    if(!fs.existsSync(target)){
-                        fs.mkdirSync(path.dirname(target), { recursive: true })
-                        fs.copyFileSync(abs, target)
-                        loggerLanding.info(`Seeded default config: ${rel}`)
-                    }
-                }
-            }
-        }
-        walk(defaultsRoot)
-    } catch(err) {
-        loggerLanding.warn('Failed to seed default configs.', err)
-    }
-}
-
 async function dlAsync(login = true) {
 
     // Login parameter is temporary for debug purposes. Allows testing the validation/downloads without
@@ -631,10 +592,6 @@ async function dlAsync(login = true) {
     fullRepairModule.destroyReceiver()
 
     setLaunchDetails(Lang.queryJS('landing.dlAsync.preparingToLaunch'))
-
-    // Seed bundled default configs (keybinds, JourneyMap) for any files the
-    // player doesn't have yet. Never overwrites existing user settings.
-    seedDefaultConfigs(serv)
 
     const mojangIndexProcessor = new MojangIndexProcessor(
         ConfigManager.getCommonDirectory(),
